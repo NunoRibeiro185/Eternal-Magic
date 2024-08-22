@@ -1,21 +1,23 @@
-extends Node
-class_name Attack
+class_name Attack extends Node
 
 @export var ar: AttackResource
 @export var utils: Utils
 @onready var player: CharacterBody2D = $".."
+@onready var state_machine: StateMachine = $"../State Machine"
 var type = ""
 
 func update_attack():
 	type = ar.type
 
 func start():
-	if ar.delivery == utils.Delivery.Shot:
+	if ar.delivery == utils.Delivery.Bullet:
 		shoot()
 	if ar.delivery == utils.Delivery.Dash:
 		dash()
+	if ar.delivery == utils.Delivery.Skillshot:
+		var skillshot = Skillshot.new()
+		skillshot.start()
 		
-
 func shoot():
 	var projectile = Projectile.new()
 	var shape = utils.draw_circle(32, ar.size)
@@ -35,13 +37,4 @@ func shoot():
 	owner.owner.add_child(projectile)
 
 func dash():
-	player.dashing = true
-	player.dashing_speed = ar.base_value
-	var dash_duration = Timer.new()
-	add_child(dash_duration)
-	dash_duration.start(ar.duration)
-	dash_duration.connect("timeout", stop_dash)
-	
-func stop_dash():
-	player.dashing = false
-	get_child(1).queue_free()
+	state_machine.state.finished.emit("Dashing", {"speed" : ar.base_value, "duration" : ar.duration})

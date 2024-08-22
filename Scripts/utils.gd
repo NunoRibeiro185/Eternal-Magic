@@ -1,5 +1,4 @@
-extends Resource
-class_name  Utils
+class_name  Utils extends Resource
 
 # Shaders
 const FIRE_SHADER = preload("res://Shaders/fire_shader.gdshader")
@@ -7,7 +6,9 @@ const FIRE_SHADER = preload("res://Shaders/fire_shader.gdshader")
 # Enums
 enum Element {Neutral, Fire, Earth, Air, Water, Electric, Ice, Poison, Grass, Light, Void}
 enum Type {None, Damage, Heal, Buff, Movement, Parry}
-enum Delivery {None, Shot, Dash, AreaFromBelow, AreaFromAbove, Melee, Line, ExplosionOutwards, GlobalFlash}
+enum Delivery {None, Bullet, Dash, Melee, Global, Skillshot, Trail, Selfcast}
+enum SkillshotTypes {None, Cone, Triangle, Circle, Line, Rectangle, Target}
+enum Buffs {Damage, Speed, AttackSpeed, Cooldown, Defense, Hp, Shield}
 
 # Helper functions
 func draw_circle(points_nb: int, radius: float) -> Polygon2D:

@@ -1,10 +1,12 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
-
-const SPEED = 300.0
-
+const RUNNING_SPEED = 300.0
+const DASHING_SPEED = 750
+var speed : float
+var dashing_speed : float
 var input : Vector2
 
+#region onready vars
 # Moves
 @onready var attack_1: Node = $Attack1
 @onready var attack_2: Node = $Attack2
@@ -17,32 +19,27 @@ var input : Vector2
 @onready var cooldown_s1: Timer = $Spell1/Cooldown_s1
 @onready var cooldown_s2: Timer = $Spell2/Cooldown_s2
 @onready var cooldown_d1: Timer = $Dodge/Cooldown_d1
+#endregion
 
+#region Bools
+#Cooldowns
 var can_a1 := true
 var can_a2 := true
 var can_s1 := true
 var can_s2 := true
 var can_d1 := true
 
+# Dashing
 var dashing := false
-var dashing_speed = 750
+#endregion
 
-func _physics_process(_delta: float) -> void:
-	var speed = SPEED
-	var direction = get_movement()
-	
-	if dashing:
-		speed = dashing_speed
-	velocity = direction * speed 
-	
-	get_move()
-	move_and_slide()
-
+# Check for movement inputs
 func get_movement():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	return input.normalized()
 	
+# Check for abillity inputs
 func get_move():
 	if Input.is_action_pressed("attack1"):
 		if can_a1:
@@ -70,8 +67,7 @@ func get_move():
 			dodge.start()
 			cooldown_d1.start(dodge.ar.cooldown)
 	
-
-
+#region Cooldown Timers
 func _on_cooldown_a_1_timeout() -> void:
 	can_a1 = true
 
@@ -86,3 +82,4 @@ func _on_cooldown_s_2_timeout() -> void:
 	
 func _on_cooldown_d_1_timeout() -> void:
 	can_d1 = true
+#endregion

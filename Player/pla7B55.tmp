@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cb84eu6hvtw56"]
+[gd_scene load_steps=15 format=3 uid="uid://cb84eu6hvtw56"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3aujx"]
 [ext_resource type="Texture2D" uid="uid://bawch2x5leakq" path="res://icon.svg" id="1_riasp"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="6_wb2ro"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/idle.gd" id="7_1kgd0"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/running.gd" id="8_487jh"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/dashing.gd" id="9_i76bh"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/casting.gd" id="10_tulnk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lo713"]
 size = Vector2(40, 40)
@@ -41,7 +39,6 @@ bounce_damage = 0.3
 pierce = false
 pierce_damage = 0.3
 homing = false
-impact = 0
 
 [sub_resource type="Resource" id="Resource_yr4si"]
 script = ExtResource("4_olwd7")
@@ -70,7 +67,6 @@ bounce_damage = 0.3
 pierce = false
 pierce_damage = 0.3
 homing = false
-impact = 0
 
 [sub_resource type="Resource" id="Resource_1gknm"]
 script = ExtResource("4_olwd7")
@@ -99,7 +95,6 @@ bounce_damage = 0.3
 pierce = false
 pierce_damage = 0.3
 homing = false
-impact = 0
 
 [sub_resource type="Resource" id="Resource_ltnip"]
 script = ExtResource("4_olwd7")
@@ -128,17 +123,16 @@ bounce_damage = 0.3
 pierce = false
 pierce_damage = 0.3
 homing = false
-impact = 0
 
 [sub_resource type="Resource" id="Resource_umxlb"]
 script = ExtResource("4_olwd7")
-base_value = 1750.0
+base_value = 1000.0
 multiplier = 1.0
 travel_speed = 1.0
 size = 1.0
 amount = 1
 range = 1.0
-duration = 0.2
+duration = 0.3
 cooldown = 1.0
 charges = 1
 cast_time = 1.0
@@ -157,7 +151,6 @@ bounce_damage = 0.3
 pierce = false
 pierce_damage = 0.3
 homing = false
-impact = 0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -217,10 +210,8 @@ script = ExtResource("7_1kgd0")
 script = ExtResource("8_487jh")
 
 [node name="Dashing" type="Node" parent="State Machine"]
-script = ExtResource("9_i76bh")
 
 [node name="Casting" type="Node" parent="State Machine"]
-script = ExtResource("10_tulnk")
 
 [node name="Targeting" type="Node" parent="State Machine"]
 

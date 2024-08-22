@@ -1,5 +1,4 @@
-extends CharacterBody2D
-class_name Projectile
+class_name Projectile extends CharacterBody2D
 
 @onready var ar : AttackResource
 
