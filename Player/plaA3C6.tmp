@@ -9,21 +9,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lo713"]
 size = Vector2(40, 40)
 
-[sub_resource type="Resource" id="Resource_t5637"]
+[sub_resource type="Resource" id="Resource_m1lio"]
 script = ExtResource("4_olwd7")
 base_value = 1.0
 multiplier = 1.0
-cooldown = 0.2
+cooldown = 1.0
 charges = 1
 amount = 1
 range = 1.0
 cast_time = 1.0
-travel_speed = 700.0
+travel_speed = 750.0
 size = 10.0
-duration = 5.0
-element = 1
-type = 1
-delivery = 1
+ttl = 30.0
+element = 0
+type = 0
+delivery = 0
 buff = []
 debuff = []
 buff_duration = []
@@ -39,7 +39,7 @@ homing = false
 [sub_resource type="Resource" id="Resource_xl4rx"]
 script = ExtResource("5_fsoo4")
 
-[sub_resource type="Resource" id="Resource_yvw83"]
+[sub_resource type="Resource" id="Resource_dj8no"]
 script = ExtResource("4_olwd7")
 base_value = 1.0
 multiplier = 1.0
@@ -50,7 +50,7 @@ range = 1.0
 cast_time = 1.0
 travel_speed = 1.0
 size = 1.0
-duration = 5.0
+ttl = 5.0
 element = 0
 type = 0
 delivery = 0
@@ -69,7 +69,7 @@ homing = false
 [sub_resource type="Resource" id="Resource_vggky"]
 script = ExtResource("5_fsoo4")
 
-[sub_resource type="Resource" id="Resource_g6ajt"]
+[sub_resource type="Resource" id="Resource_v2agf"]
 script = ExtResource("4_olwd7")
 base_value = 1.0
 multiplier = 1.0
@@ -80,7 +80,7 @@ range = 1.0
 cast_time = 1.0
 travel_speed = 1.0
 size = 1.0
-duration = 5.0
+ttl = 5.0
 element = 0
 type = 0
 delivery = 0
@@ -99,7 +99,7 @@ homing = false
 [sub_resource type="Resource" id="Resource_eruyp"]
 script = ExtResource("5_fsoo4")
 
-[sub_resource type="Resource" id="Resource_ltnip"]
+[sub_resource type="Resource" id="Resource_7c7ga"]
 script = ExtResource("4_olwd7")
 base_value = 1.0
 multiplier = 1.0
@@ -110,7 +110,7 @@ range = 1.0
 cast_time = 1.0
 travel_speed = 1.0
 size = 1.0
-duration = 5.0
+ttl = 5.0
 element = 0
 type = 0
 delivery = 0
@@ -129,9 +129,9 @@ homing = false
 [sub_resource type="Resource" id="Resource_4ioc1"]
 script = ExtResource("5_fsoo4")
 
-[sub_resource type="Resource" id="Resource_umxlb"]
+[sub_resource type="Resource" id="Resource_qj4fc"]
 script = ExtResource("4_olwd7")
-base_value = 1000.0
+base_value = 1.0
 multiplier = 1.0
 cooldown = 1.0
 charges = 1
@@ -140,10 +140,10 @@ range = 1.0
 cast_time = 1.0
 travel_speed = 1.0
 size = 1.0
-duration = 0.3
+ttl = 5.0
 element = 0
 type = 0
-delivery = 2
+delivery = 0
 buff = []
 debuff = []
 buff_duration = []
@@ -160,7 +160,7 @@ homing = false
 script = ExtResource("5_fsoo4")
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 6
+collision_mask = 7
 script = ExtResource("1_3aujx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -173,59 +173,25 @@ texture = ExtResource("1_riasp")
 
 [node name="Attack1" type="Node" parent="."]
 script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_t5637")
+attack_resource = SubResource("Resource_m1lio")
 utils = SubResource("Resource_xl4rx")
-
-[node name="Cooldown_a1" type="Timer" parent="Attack1"]
 
 [node name="Attack2" type="Node" parent="."]
 script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_yvw83")
+attack_resource = SubResource("Resource_dj8no")
 utils = SubResource("Resource_vggky")
-
-[node name="Cooldown_a2" type="Timer" parent="Attack2"]
 
 [node name="Spell1" type="Node" parent="."]
 script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_g6ajt")
+attack_resource = SubResource("Resource_v2agf")
 utils = SubResource("Resource_eruyp")
-
-[node name="Cooldown_s1" type="Timer" parent="Spell1"]
 
 [node name="Spell2" type="Node" parent="."]
 script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_ltnip")
+attack_resource = SubResource("Resource_7c7ga")
 utils = SubResource("Resource_4ioc1")
-
-[node name="Cooldown_s2" type="Timer" parent="Spell2"]
 
 [node name="Dodge" type="Node" parent="."]
 script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_umxlb")
+attack_resource = SubResource("Resource_qj4fc")
 utils = SubResource("Resource_tg4x5")
-
-[node name="Cooldown_d1" type="Timer" parent="Dodge"]
-
-[node name="State Machine" type="Node" parent="."]
-
-[node name="Moving" type="Node" parent="State Machine"]
-
-[node name="Dashing" type="Node" parent="State Machine"]
-
-[node name="Casting" type="Node" parent="State Machine"]
-
-[node name="Dead" type="Node" parent="State Machine"]
-
-[node name="Hurt" type="Node" parent="State Machine"]
-
-[node name="Root" type="Node" parent="State Machine"]
-
-[node name="Stunned" type="Node" parent="State Machine"]
-
-[node name="Idle" type="Node" parent="State Machine"]
-
-[connection signal="timeout" from="Attack1/Cooldown_a1" to="." method="_on_cooldown_a_1_timeout"]
-[connection signal="timeout" from="Attack2/Cooldown_a2" to="." method="_on_cooldown_a_2_timeout"]
-[connection signal="timeout" from="Spell1/Cooldown_s1" to="." method="_on_cooldown_s_1_timeout"]
-[connection signal="timeout" from="Spell2/Cooldown_s2" to="." method="_on_cooldown_s_2_timeout"]
-[connection signal="timeout" from="Dodge/Cooldown_d1" to="." method="_on_cooldown_d_1_timeout"]

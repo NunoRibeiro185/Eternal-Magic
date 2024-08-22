@@ -12,10 +12,28 @@ var input : Vector2
 @onready var spell_2: Node = $Spell2
 @onready var dodge: Node = $Dodge
 
-func _physics_process(_delta: float) -> void:
+@onready var cooldown_a1: Timer = $Attack1/Cooldown_a1
+@onready var cooldown_a2: Timer = $Attack2/Cooldown_a2
+@onready var cooldown_s1: Timer = $Spell1/Cooldown_s1
+@onready var cooldown_s2: Timer = $Spell2/Cooldown_s2
+@onready var cooldown_d1: Timer = $Dodge/Cooldown_d1
 
-	var playerInput = get_movement()
-	velocity = playerInput * SPEED 
+var can_a1 := true
+var can_a2 := true
+var can_s1 := true
+var can_s2 := true
+var can_d1 := true
+
+var dashing := false
+var dashing_speed = 750
+
+func _physics_process(_delta: float) -> void:
+	var speed = SPEED
+	var direction = get_movement()
+	
+	if dashing:
+		speed = dashing_speed
+	velocity = direction * speed 
 	
 	get_move()
 	move_and_slide()
@@ -26,14 +44,45 @@ func get_movement():
 	return input.normalized()
 	
 func get_move():
-	if Input.is_action_just_pressed("attack1"):
-		attack_1.start()
-	if Input.is_action_just_pressed("attack2"):
-		attack_2.start()
-	if Input.is_action_just_pressed("spell1"):
-		spell_1.start()
-	if Input.is_action_just_pressed("spell2"):
-		spell_2.start()
-	if Input.is_action_just_pressed("dodge"):
-		dodge.start()
+	if Input.is_action_pressed("attack1"):
+		if can_a1:
+			can_a1 = false
+			attack_1.start()
+			cooldown_a1.start(attack_1.ar.cooldown)
+	if Input.is_action_pressed("attack2"):
+		if can_a2:
+			can_a2 = false
+			attack_2.start()
+			cooldown_a2.start(attack_2.ar.cooldown)
+	if Input.is_action_pressed("spell1"):
+		if can_s1:
+			can_s1 = false
+			spell_1.start()
+			cooldown_s1.start(spell_1.ar.cooldown)
+	if Input.is_action_pressed("spell2"):
+		if can_s2:
+			can_s2 = false
+			spell_2.start()
+			cooldown_s2.start(spell_2.ar.cooldown)
+	if Input.is_action_pressed("dodge"):
+		if can_d1:
+			can_d1 = false
+			dodge.start()
+			cooldown_d1.start(dodge.ar.cooldown)
 	
+
+
+func _on_cooldown_a_1_timeout() -> void:
+	can_a1 = true
+
+func _on_cooldown_a_2_timeout() -> void:
+	can_a2 = true
+
+func _on_cooldown_s_1_timeout() -> void:
+	can_s1 = true
+
+func _on_cooldown_s_2_timeout() -> void:
+	can_s2 = true
+	
+func _on_cooldown_d_1_timeout() -> void:
+	can_d1 = true

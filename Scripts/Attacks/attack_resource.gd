@@ -11,16 +11,16 @@ class_name AttackResource
 @export var cast_time := 1.0
 @export var travel_speed := 1.0
 @export var size := 1.0
-@export var ttl := 5.0
+@export var duration := 5.0
 
 # Element (fire, ice, water, wind, earth, etc.)
-@export var element = 0
+@export var element = Utils.Element.Neutral
 
 # Type (dmg, heal, buff, etc.)
-@export var type = 0
+@export var type = Utils.Type.None
 
 # Delivery type (aoe, point and click, skillshot, self cast, etc.)
-@export var delivery = 0
+@export var delivery = Utils.Delivery.None
 
 # Buff/Debuff
 @export var buff = []

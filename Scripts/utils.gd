@@ -1,12 +1,15 @@
 extends Resource
 class_name  Utils
 
+# Shaders
+const FIRE_SHADER = preload("res://Shaders/fire_shader.gdshader")
 
-enum Element {Fire, Earth, Air, Water, Electric, Ice, Poison, Grass, Light, Void}
-enum Type {Damage, Heal, Buff, Movement, Parry}
-enum Delivery {Shot, AreaFromBelow, AreaFromAbove, Melee, Line, ExplosionOutwards, GlobalFlash}
+# Enums
+enum Element {Neutral, Fire, Earth, Air, Water, Electric, Ice, Poison, Grass, Light, Void}
+enum Type {None, Damage, Heal, Buff, Movement, Parry}
+enum Delivery {None, Shot, Dash, AreaFromBelow, AreaFromAbove, Melee, Line, ExplosionOutwards, GlobalFlash}
 
-
+# Helper functions
 func draw_circle(points_nb: int, radius: float) -> Polygon2D:
 	var polygon = Polygon2D.new()
 	var points = PackedVector2Array()
