@@ -15,14 +15,14 @@ func start():
 	if ar.delivery == utils.Delivery.Dash:
 		dash()
 	if ar.delivery == utils.Delivery.Skillshot:
-		var skillshot = Skillshot.new()
-		skillshot.start()
+		state_machine.state.finished.emit("Targeting", {"attack" : ar})
 		
 func shoot():
 	var projectile = Projectile.new()
-	var shape = utils.draw_circle(32, ar.size)
+	var shape = utils.draw_circle(5, ar.size)
 	var collision_shape = CircleShape2D.new()
 	var collision = CollisionShape2D.new()
+	
 	
 	collision_shape.radius = ar.size
 	collision.shape = collision_shape
@@ -37,4 +37,4 @@ func shoot():
 	owner.owner.add_child(projectile)
 
 func dash():
-	state_machine.state.finished.emit("Dashing", {"speed" : ar.base_value, "duration" : ar.duration})
+	state_machine.state.finished.emit("Dashing", {"attack" : ar})

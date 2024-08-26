@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Attacks/attack.gd" id="3_ga6wc"]
 [ext_resource type="Script" path="res://Scripts/Attacks/attack_resource.gd" id="4_olwd7"]
 [ext_resource type="Resource" uid="uid://bau773gstc3iv" path="res://Resources/util.tres" id="5_caxd8"]
-[ext_resource type="Script" path="res://Scripts/Attacks/Indicators/pointing_indicator.gd" id="6_ix8pv"]
+[ext_resource type="Script" path="res://Scripts/Attacks/Indicators/line_indicator.gd" id="6_ix8pv"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="6_wb2ro"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/idle.gd" id="7_1kgd0"]
 [ext_resource type="Texture2D" uid="uid://cah7h8lupvf8r" path="res://Textures/IndicatorTexture.tres" id="7_p8elm"]
@@ -29,7 +29,6 @@ duration = 5.0
 cooldown = 0.095
 charges = -1
 cast_time = 0.0
-can_move_while_casting = false
 element = 0
 type = 1
 delivery = 1
@@ -59,7 +58,6 @@ duration = 5.0
 cooldown = 1.0
 charges = 1
 cast_time = 0.0
-can_move_while_casting = false
 element = 0
 type = 0
 delivery = 0
@@ -86,18 +84,17 @@ script = ExtResource("4_olwd7")
 base_value = 1.0
 multiplier = 1.0
 travel_speed = 1.0
-size = 500.0
+size = 1.0
 amount = 1
-range = 250.0
+range = 200.0
 duration = 5.0
 cooldown = 1.0
 charges = 1
-cast_time = 0.1
-can_move_while_casting = false
+cast_time = 0.0
 element = 0
 type = 0
 delivery = 5
-skillshot_type = 1
+skillshot_type = 2
 indicator = SubResource("Resource_26ayo")
 buff = Array[int]([])
 debuff = Array[int]([])
@@ -124,7 +121,6 @@ duration = 5.0
 cooldown = 1.0
 charges = 1
 cast_time = 0.0
-can_move_while_casting = false
 element = 0
 type = 0
 delivery = 0
@@ -154,7 +150,6 @@ duration = 0.2
 cooldown = 1.0
 charges = 1
 cast_time = 0.0
-can_move_while_casting = false
 element = 0
 type = 0
 delivery = 2

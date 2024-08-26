@@ -10,7 +10,8 @@ class_name AttackResource extends Resource
 @export var duration := 5.0
 @export var cooldown := 1.0
 @export var charges := 1
-@export var cast_time := 1.0
+@export var cast_time := 0.0
+@export var can_move_while_casting := false
 
 # Element (fire, ice, water, wind, earth, etc.)
 @export var element = Utils.Element.Neutral
@@ -23,6 +24,7 @@ class_name AttackResource extends Resource
 
 # How will the skillshot manifest (cone, line, targeted, circle, etc.)
 @export var skillshot_type = Utils.SkillshotTypes.None
+@export var indicator : Indicator
 
 # Buff/Debuff
 @export var buff : Array[int] = []

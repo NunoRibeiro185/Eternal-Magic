@@ -1,13 +1,18 @@
 class_name Dashing extends PlayerState
 
+var ar : AttackResource
 var dashing_speed : float
 var dash_duration : float
 var direction : Vector2
+var previous_state : String
 
 func enter(previous_state_path: String, data := {}) -> void:
-	dashing_speed = data["speed"]
-	dash_duration = data["duration"]
+	ar = data["attack"]
+	dashing_speed = ar.base_value
+	dash_duration = ar.duration
 	direction = player.get_movement()
+	previous_state = previous_state_path
+	print("DASHING")
 	dash()
 
 func dash():
@@ -25,4 +30,4 @@ func physics_update(delta: float) -> void:
 func stop_dash():
 	player.dashing = false
 	get_child(0).queue_free()
-	finished.emit(RUNNING)
+	finished.emit(previous_state)
