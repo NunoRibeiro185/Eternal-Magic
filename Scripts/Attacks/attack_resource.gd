@@ -4,10 +4,14 @@ class_name AttackResource extends Resource
 @export var base_value := 1.0
 @export var multiplier := 1.0
 @export var travel_speed := 1.0
-@export var size := 1.0
+@export var width := 1.0
+@export var height := 1.0
 @export var amount := 1 # number of projectiles, aoes, heals, etc
-@export var range := 1.0
+@export var attack_width := 1.0
+@export var attack_range := 1.0
+@export var has_range := false
 @export var duration := 5.0
+@export var has_duration := true
 @export var cooldown := 1.0
 @export var charges := 1
 @export var cast_time := 0.0
@@ -23,7 +27,7 @@ class_name AttackResource extends Resource
 @export var delivery = Utils.Delivery.None
 
 # How will the skillshot manifest (cone, line, targeted, circle, etc.)
-@export var skillshot_type = Utils.SkillshotTypes.None
+@export var shape = Utils.Shape.None
 @export var indicator : Indicator
 
 # Buff/Debuff

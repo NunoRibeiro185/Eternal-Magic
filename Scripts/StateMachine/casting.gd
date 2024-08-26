@@ -3,7 +3,7 @@ extends PlayerState
 var ar: AttackResource
 var timer : Timer
 
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, data := {}) -> void:
 	print("CASTING")
 	ar = data["attack"]
 	if ar.cast_time  == 0:
@@ -13,12 +13,12 @@ func enter(previous_state_path: String, data := {}) -> void:
 	timer.connect("timeout", cast_over)
 	timer.start(ar.cast_time)
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	print("time left: ", timer.time_left)
 	if ar.can_move_while_casting:
-		var direction = player.get_movement()
+		player.direction = player.get_movement()
 		player.speed = player.RUNNING_SPEED
-		player.velocity = direction * player.speed
+		player.velocity = player.direction * player.speed
 		player.move_and_slide()
 
 func cast_over():

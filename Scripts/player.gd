@@ -5,6 +5,7 @@ const DASHING_SPEED = 750
 var speed : float
 var dashing_speed : float
 var input : Vector2
+var direction : Vector2
 
 #region onready vars
 # Moves

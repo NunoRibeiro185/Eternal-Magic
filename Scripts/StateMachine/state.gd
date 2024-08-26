@@ -2,7 +2,7 @@ class_name State extends Node
 
 signal finished(next_state: String, data: Dictionary)
 
-func enter(previous_state: String, data := {}) -> void:
+func enter(_previous_state: String, _data := {}) -> void:
 	pass
 
 func handle_input(_event: InputEvent) -> void:

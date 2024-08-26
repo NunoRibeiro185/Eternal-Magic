@@ -22,7 +22,7 @@ func dash():
 	dash_duration_timer.start(dash_duration)
 	dash_duration_timer.connect("timeout", stop_dash)
 	
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	player.velocity = direction * dashing_speed
 	player.get_move()
 	player.move_and_slide()
