@@ -9,26 +9,28 @@ class_name AttackResource extends Resource
 @export var amount := 1 # number of projectiles, aoes, heals, etc
 @export var attack_width := 1.0
 @export var attack_range := 1.0
-@export var has_range := false
+@export var has_range : bool
 @export var duration := 5.0
-@export var has_duration := true
+@export var has_duration : bool
 @export var cooldown := 1.0
 @export var charges := 1
 @export var cast_time := 0.0
-@export var can_move_while_casting := false
+@export var can_move_while_casting : bool
 
 # Element (fire, ice, water, wind, earth, etc.)
-@export var element = Utils.Element.Neutral
+@export var element = Utility.Element.Neutral
 
 # Type (dmg, heal, buff, etc.)
-@export var type = Utils.Type.None
+@export var type = Utility.Type.None
 
 # Delivery type (aoe, point and click, skillshot, self cast, etc.)
-@export var delivery = Utils.Delivery.None
+@export var delivery = Utility.Delivery.None
 
 # How will the skillshot manifest (cone, line, targeted, circle, etc.)
-@export var shape = Utils.Shape.None
+@export var shape = Utility.Shape.None
 @export var indicator : Indicator
+
+@export var movement_type : Utility.MovementType
 
 # Buff/Debuff
 @export var buff : Array[int] = []

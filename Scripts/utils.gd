@@ -1,18 +1,22 @@
-class_name  Utils extends Resource
+extends Node
 
 # CONSTS
 const PLAYER_WIDTH = 32
 const CIRCLE_POINT_NB = 32
+
+const SHAPE = 0
+const COLLISION = 1
 
 # Shaders
 const FIRE_SHADER = preload("res://Shaders/fire_shader.gdshader")
 
 # Enums
 enum Element {Neutral, Fire, Earth, Air, Water, Electric, Ice, Poison, Grass, Light, Void}
-enum Type {None, Damage, Heal, Buff, Movement, Parry}
-enum Delivery {None, Bullet, Dash, Melee, Global, Skillshot, Trail, Selfcast}
+enum Type {None, Spell, Dash}
+enum Delivery {None, Projectile, Dash, Melee, Global, Skillshot, Trail, Selfcast}
 enum Shape {None, Cone, Triangle, Circle, Line, Rectangle, Target}
 enum Buffs {Damage, Speed, AttackSpeed, Cooldown, Defense, Hp, Shield}
+enum MovementType {Instant, Wave, Projectile}
 
 # Helper functions
 func draw_circle(points_nb: int, radius: float) -> PackedVector2Array:
@@ -47,14 +51,14 @@ func draw_triangle(width : float, height : float) -> PackedVector2Array:
 func draw_rectangle(width : float, height : float) -> PackedVector2Array:
 	var points = PackedVector2Array()
 	
-	points.push_back(Vector2(Utils.PLAYER_WIDTH/2, -width/2))
+	points.push_back(Vector2(Utility.PLAYER_WIDTH/2, -width/2))
 	points.push_back(Vector2(height, -width/2))
 	points.push_back(Vector2(height, width/2))
-	points.push_back(Vector2(Utils.PLAYER_WIDTH/2, width/2))
+	points.push_back(Vector2(Utility.PLAYER_WIDTH/2, width/2))
 	
 	return points
 	
-func calculate_angle(width: float, height: float):
+func calculate_angle(width: float, height: float) -> float:
 	var angle : float
 	
 	var a = Vector2(-width/2, height)
@@ -64,12 +68,12 @@ func calculate_angle(width: float, height: float):
 	#print("angle: ", rad_to_deg(angle))
 	return angle
 	
-func select_shape(skyllshot_type : int,  width: float, height: float) -> Array:
+func select_shape(spell_shape : int,  width: float, height: float) -> Array:
 	var shape : Polygon2D
 	var collision = null
 	var points : PackedVector2Array
 	
-	match skyllshot_type:
+	match spell_shape:
 		Shape.Circle:
 			points = draw_circle(CIRCLE_POINT_NB, width)
 			shape = Polygon2D.new()

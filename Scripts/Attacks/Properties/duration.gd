@@ -1,16 +1,16 @@
 class_name Duration extends Node
 
 var timer := Timer.new()
-var projectile : Projectile
+var spell : Spell
 
-func _init(p) -> void:
-	projectile = p 
+func _init(s) -> void:
+	spell = s
 	add_child(timer)
-	timer.wait_time = projectile.ar.duration
+	timer.wait_time = spell.ar.duration
 	timer.connect("timeout", _on_timer_timeout)
 	
 func _ready() -> void:
 	timer.start()
 	 
 func _on_timer_timeout() -> void:
-	projectile.queue_free()
+	spell.queue_free()

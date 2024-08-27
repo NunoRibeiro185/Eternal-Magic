@@ -1,11 +1,13 @@
 extends PlayerState
 
 var ar: AttackResource
-var timer : Timer
+var timer: Timer
+var spell_manager: SpellManager
 
 func enter(_previous_state_path: String, data := {}) -> void:
 	print("CASTING")
 	ar = data["attack"]
+	spell_manager = data["spell_manager"]
 	if ar.cast_time  == 0:
 		finished.emit(IDLE)
 	timer = Timer.new()
@@ -23,5 +25,6 @@ func physics_update(_delta: float) -> void:
 
 func cast_over():
 	#Execute attack
+	spell_manager.activate()
 	finished.emit(IDLE)
 	timer.queue_free()

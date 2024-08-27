@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bawch2x5leakq" path="res://icon.svg" id="1_riasp"]
 [ext_resource type="Script" path="res://Scripts/Attacks/attack.gd" id="3_ga6wc"]
 [ext_resource type="Script" path="res://Scripts/Attacks/attack_resource.gd" id="4_olwd7"]
+[ext_resource type="Resource" uid="uid://bau773gstc3iv" path="res://Resources/util.tres" id="5_caxd8"]
 [ext_resource type="Script" path="res://Scripts/Attacks/Indicators/pointing_indicator.gd" id="6_ix8pv"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="6_wb2ro"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/idle.gd" id="7_1kgd0"]
@@ -18,73 +19,71 @@ size = Vector2(38, 38)
 
 [sub_resource type="Resource" id="Resource_78ck7"]
 script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
+base_value = null
+multiplier = null
 travel_speed = 400.0
 width = 10.0
 height = 20.0
-amount = 1
+amount = null
 attack_width = 100.0
 attack_range = 750.0
-has_range = false
+has_range = null
 duration = 10.0
-has_duration = false
+has_duration = null
 cooldown = 0.2
 charges = -1
-cast_time = 0.0
-can_move_while_casting = false
-element = 0
+cast_time = null
+can_move_while_casting = null
+element = null
 type = 1
 delivery = 1
 shape = 2
-movement_type = 2
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
+buff = null
+debuff = null
+buff_duration = null
+debuff_duration = null
+bounce = null
+max_bounce_distance = null
+max_bounces = null
+bounce_damage = null
+pierce = null
+pierce_damage = null
+homing = null
+impact = null
 
 [sub_resource type="Resource" id="Resource_yr4si"]
 script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 1.0
-width = 1.0
-height = 1.0
-amount = 1
-attack_width = 1.0
-attack_range = 1.0
-has_range = false
-duration = 5.0
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 0.0
-can_move_while_casting = false
-element = 0
-type = 0
-delivery = 0
-shape = 0
-movement_type = 0
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
+base_value = null
+multiplier = null
+travel_speed = null
+width = null
+height = null
+amount = null
+attack_width = null
+attack_range = null
+has_range = null
+duration = null
+has_duration = null
+cooldown = null
+charges = null
+cast_time = null
+can_move_while_casting = null
+element = null
+type = null
+delivery = null
+shape = null
+buff = null
+debuff = null
+buff_duration = null
+debuff_duration = null
+bounce = null
+max_bounce_distance = null
+max_bounces = null
+bounce_damage = null
+pierce = null
+pierce_damage = null
+homing = null
+impact = null
 
 [sub_resource type="Resource" id="Resource_26ayo"]
 script = ExtResource("6_ix8pv")
@@ -92,113 +91,106 @@ texture = ExtResource("7_p8elm")
 
 [sub_resource type="Resource" id="Resource_1gknm"]
 script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 1.0
-width = 100.0
-height = 0.0
-amount = 1
-attack_width = 1.0
-attack_range = 100.0
-has_range = false
-duration = 5.0
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 0.001
-can_move_while_casting = false
-element = 0
-type = 1
+base_value = null
+multiplier = null
+travel_speed = null
+width = 32.0
+height = 250.0
+amount = null
+attack_width = null
+attack_range = 250.0
+has_range = null
+duration = null
+has_duration = null
+cooldown = null
+charges = null
+cast_time = 0.1
+can_move_while_casting = null
+element = null
+type = null
 delivery = 5
-shape = 3
+shape = 5
 indicator = SubResource("Resource_26ayo")
-movement_type = 1
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
-
-[sub_resource type="Resource" id="Resource_t0f4s"]
-script = ExtResource("6_ix8pv")
+buff = null
+debuff = null
+buff_duration = null
+debuff_duration = null
+bounce = null
+max_bounce_distance = null
+max_bounces = null
+bounce_damage = null
+pierce = null
+pierce_damage = null
+homing = null
+impact = null
 
 [sub_resource type="Resource" id="Resource_ltnip"]
 script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 150.0
-width = 100.0
-height = 250.0
-amount = 1
-attack_width = 100.0
-attack_range = 250.0
-has_range = false
-duration = 5.0
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 0.1
-can_move_while_casting = false
-element = 1
-type = 1
-delivery = 5
-shape = 5
-indicator = SubResource("Resource_t0f4s")
-movement_type = 1
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
+base_value = null
+multiplier = null
+travel_speed = null
+width = null
+height = null
+amount = null
+attack_width = null
+attack_range = null
+has_range = null
+duration = null
+has_duration = null
+cooldown = null
+charges = null
+cast_time = null
+can_move_while_casting = null
+element = null
+type = null
+delivery = null
+shape = null
+buff = null
+debuff = null
+buff_duration = null
+debuff_duration = null
+bounce = null
+max_bounce_distance = null
+max_bounces = null
+bounce_damage = null
+pierce = null
+pierce_damage = null
+homing = null
+impact = null
 
 [sub_resource type="Resource" id="Resource_umxlb"]
 script = ExtResource("4_olwd7")
 base_value = 1500.0
-multiplier = 1.0
-travel_speed = 1.0
-width = 1.0
-height = 1.0
-amount = 1
-attack_width = 1.0
-attack_range = 1.0
-has_range = false
+multiplier = null
+travel_speed = null
+width = null
+height = null
+amount = null
+attack_width = null
+attack_range = null
+has_range = null
 duration = 0.2
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 0.0
-can_move_while_casting = false
-element = 0
-type = 2
+has_duration = null
+cooldown = null
+charges = null
+cast_time = null
+can_move_while_casting = null
+element = null
+type = null
 delivery = 2
-shape = 0
-movement_type = 0
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
+shape = null
+buff = null
+debuff = null
+buff_duration = null
+debuff_duration = null
+bounce = null
+max_bounce_distance = null
+max_bounces = null
+bounce_damage = null
+pierce = null
+pierce_damage = null
+homing = null
+impact = null
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -217,30 +209,35 @@ shape = SubResource("RectangleShape2D_lo713")
 [node name="Attack1" type="Node2D" parent="."]
 script = ExtResource("3_ga6wc")
 ar = SubResource("Resource_78ck7")
+utils = ExtResource("5_caxd8")
 
 [node name="Cooldown_a1" type="Timer" parent="Attack1"]
 
 [node name="Attack2" type="Node2D" parent="."]
 script = ExtResource("3_ga6wc")
 ar = SubResource("Resource_yr4si")
+utils = ExtResource("5_caxd8")
 
 [node name="Cooldown_a2" type="Timer" parent="Attack2"]
 
 [node name="Spell1" type="Node2D" parent="."]
 script = ExtResource("3_ga6wc")
 ar = SubResource("Resource_1gknm")
+utils = ExtResource("5_caxd8")
 
 [node name="Cooldown_s1" type="Timer" parent="Spell1"]
 
 [node name="Spell2" type="Node2D" parent="."]
 script = ExtResource("3_ga6wc")
 ar = SubResource("Resource_ltnip")
+utils = ExtResource("5_caxd8")
 
 [node name="Cooldown_s2" type="Timer" parent="Spell2"]
 
 [node name="Dodge" type="Node2D" parent="."]
 script = ExtResource("3_ga6wc")
 ar = SubResource("Resource_umxlb")
+utils = ExtResource("5_caxd8")
 
 [node name="Cooldown_d1" type="Timer" parent="Dodge"]
 
