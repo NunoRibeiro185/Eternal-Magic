@@ -13,6 +13,14 @@ func _physics_process(delta: float) -> void:
 
 func add_collisions():
 	var collision = CollisionShape2D.new()
-	collision.shape = Utility.select_shape(ar.shape, ar.width, ar.height)[1]
-	spell.collision = collision
+	var collision_shape = null
+	if ar.shape == Utility.Shape.Circle:
+		collision_shape = CircleShape2D.new()
+		collision_shape.radius = ar.width
+	else:
+		var points = Utility.select_shape(ar.shape, ar.width, ar.height)
+		collision_shape = ConvexPolygonShape2D.new()
+		collision_shape.points = points
+		
+	collision.shape = collision_shape
 	spell.add_child(collision)

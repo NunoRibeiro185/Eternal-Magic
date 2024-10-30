@@ -2,7 +2,7 @@ extends Node
 
 # CONSTS
 const PLAYER_WIDTH = 32
-const CIRCLE_POINT_NB = 32
+const CIRCLE_POINT_NB = 64
 
 const SHAPE = 0
 const COLLISION = 1
@@ -68,41 +68,16 @@ func calculate_angle(width: float, height: float) -> float:
 	#print("angle: ", rad_to_deg(angle))
 	return angle
 	
-func select_shape(spell_shape : int,  width: float, height: float) -> Array:
-	var shape : Polygon2D
-	var collision = null
+func select_shape(spell_shape : int,  width: float, height: float) -> PackedVector2Array:
 	var points : PackedVector2Array
 	
 	match spell_shape:
 		Shape.Circle:
 			points = draw_circle(CIRCLE_POINT_NB, width)
-			shape = Polygon2D.new()
-			shape.polygon = points
-			
-			collision = CircleShape2D.new()
-			collision.radius = width
 		Shape.Triangle:
 			points = draw_triangle(width, height)
-			shape = Polygon2D.new()
-			shape.polygon = points
-			
-			collision = ConvexPolygonShape2D.new()
-			collision.points = points
-			
 		Shape.Rectangle:
 			points = draw_rectangle(width, height)
-			shape = Polygon2D.new()
-			shape.polygon = points
-			
-			collision = ConvexPolygonShape2D.new()
-			collision.points = points
-			
 		Shape.Cone:
 			points = draw_cone(CIRCLE_POINT_NB/4, width, height)
-			shape = Polygon2D.new()
-			shape.polygon = points
-			
-			collision = ConvexPolygonShape2D.new()
-			collision.points = points
-			
-	return [shape, collision]
+	return points

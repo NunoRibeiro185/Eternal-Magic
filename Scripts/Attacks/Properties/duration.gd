@@ -13,4 +13,4 @@ func _ready() -> void:
 	timer.start()
 	 
 func _on_timer_timeout() -> void:
-	spell.queue_free()
+	spell.spell_free()

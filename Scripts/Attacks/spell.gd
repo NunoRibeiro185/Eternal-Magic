@@ -12,4 +12,7 @@ func _ready() -> void:
 	connect("body_entered", _on_collision)
 
 func _on_collision(body):
+	spell_free()
+
+func spell_free():
 	queue_free()

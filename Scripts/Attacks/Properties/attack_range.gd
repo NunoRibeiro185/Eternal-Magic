@@ -13,5 +13,5 @@ func _init(s):
 func _physics_process(delta: float) -> void:
 	distance_traveled += spell.global_position.distance_to(last_position)
 	if distance_traveled >= attack_range:
-		spell.queue_free()
+		spell.spell_free()
 	last_position = spell.global_position
