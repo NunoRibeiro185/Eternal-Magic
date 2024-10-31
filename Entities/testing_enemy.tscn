@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://4pgfcjsqojp8"]
+[gd_scene load_steps=7 format=3 uid="uid://4pgfcjsqojp8"]
 
 [ext_resource type="Texture2D" uid="uid://bawch2x5leakq" path="res://icon.svg" id="1_yo315"]
+[ext_resource type="PackedScene" uid="uid://b8vdklslco2kr" path="res://Scenes/Components/health_component.tscn" id="2_s7a6a"]
+[ext_resource type="PackedScene" uid="uid://df0rulc3gre6g" path="res://Scenes/Components/hitbox_component.tscn" id="3_a577c"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vo4jg"]
 blend_mode = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c25n"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fcwkj"]
+radius = 2.0
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0aamw"]
 size = Vector2(38, 38)
 
-[node name="TestingEnemy" type="CharacterBody2D"]
+[node name="TestingEnemy" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
 collision_mask = 5
 
@@ -17,5 +23,17 @@ material = SubResource("CanvasItemMaterial_vo4jg")
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_yo315")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4c25n")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 17)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_fcwkj")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_s7a6a")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_a577c")]
+collision_layer = 2
+collision_mask = 13
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_0aamw")

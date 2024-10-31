@@ -1,8 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://gsmnpsiy557r"]
+[gd_scene load_steps=11 format=3 uid="uid://gsmnpsiy557r"]
+
+[ext_resource type="Texture2D" uid="uid://tvrg558d8oa7" path="res://Textures/Water2.png" id="1_23pml"]
+
+[sub_resource type="Curve" id="Curve_2l3wf"]
+_data = [Vector2(0.0130435, 0.384615), 0.0, 0.0, 0, 0, Vector2(0.356522, 0.461538), 0.0, 0.0, 0, 0, Vector2(0.817391, 0.241758), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n5881"]
+curve = SubResource("Curve_2l3wf")
 
 [sub_resource type="Gradient" id="Gradient_ehnkw"]
-offsets = PackedFloat32Array(0, 0.590164, 1)
-colors = PackedColorArray(0.218488, 0.723144, 0.754575, 1, 0.136865, 0.0599066, 0.649351, 1, 1, 1, 1, 0.564706)
+offsets = PackedFloat32Array(0.0247525, 0.30198, 1)
+colors = PackedColorArray(0.297849, 0.349532, 0.987809, 0.682353, 0.132, 0.5896, 0.66, 0.670588, 1, 1, 1, 0.564706)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2bgtj"]
 gradient = SubResource("Gradient_ehnkw")
@@ -14,28 +23,30 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_edswj"]
 curve = SubResource("Curve_ycism")
 
-[sub_resource type="Curve" id="Curve_oy3mx"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.903973, 0.136518), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_fvivv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ii21r"]
-curve = SubResource("Curve_oy3mx")
+[sub_resource type="CurveTexture" id="CurveTexture_hx4oq"]
+curve = SubResource("Curve_fvivv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oup6a"]
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
 direction = Vector3(-1, 0, 0)
-spread = 5.0
-flatness = 0.747
-initial_velocity_min = 18.83
-initial_velocity_max = 120.98
-gravity = Vector3(0, 0, 0)
-scale_min = 10.0
-scale_max = 10.0
-scale_curve = SubResource("CurveTexture_ii21r")
+spread = 55.0
+initial_velocity_min = -15.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_hx4oq")
 color_ramp = SubResource("GradientTexture1D_2bgtj")
+alpha_curve = SubResource("CurveTexture_n5881")
 emission_curve = SubResource("CurveTexture_edswj")
-turbulence_enabled = true
-turbulence_noise_scale = 1.211
-turbulence_noise_speed_random = 1.11
+turbulence_noise_strength = 12.85
+turbulence_noise_scale = 0.544
+turbulence_noise_speed = Vector3(16.01, 12.87, 0)
+turbulence_noise_speed_random = 2.95
 turbulence_influence_max = 0.317
 turbulence_initial_displacement_min = -15.0
 turbulence_initial_displacement_max = 15.0
@@ -44,6 +55,10 @@ collision_friction = 0.75
 collision_bounce = 0.7
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
-amount = 300
+amount = 350
 process_material = SubResource("ParticleProcessMaterial_oup6a")
+texture = ExtResource("1_23pml")
+lifetime = 0.5
+speed_scale = 0.5
 visibility_rect = Rect2(-500, -100, 500, 200)
+trail_lifetime = 0.05

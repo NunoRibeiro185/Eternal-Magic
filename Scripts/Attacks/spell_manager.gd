@@ -15,10 +15,11 @@ func activate():
 		var spell = Spell.new()
 		var shape_points = Utility.select_shape(ar.shape, ar.width, ar.height)
 		var shape = Polygon2D.new()
+		var particle: GPUParticles2D = get_element()
 		
 		shape.polygon = shape_points
 		spell.direction = direction.rotated(angle)
-		spell.particle = get_element().instantiate()
+		spell.particle = particle
 		spell.ar = ar
 		
 		# Collisions
@@ -48,11 +49,14 @@ func activate():
 		player.get_tree().root.call_deferred("add_child", spell)
 
 func get_element():
+	var element
 	match ar.element:
 		Utility.Element.Neutral:
 			return Color.WHITE
 		Utility.Element.Fire:
-			return Utility.FIRE
+			element = Utility.FIRE.instantiate()
+			element.process_material = Utility.FIRE_PARTICLE_MATERIAL.duplicate()
+			return element
 		Utility.Element.Water:
 			return Utility.WATER
 	

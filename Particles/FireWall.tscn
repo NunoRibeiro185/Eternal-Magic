@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bptkt7w5vwktb"]
+
+[ext_resource type="Texture2D" uid="uid://dxwsl26y352wl" path="res://Textures/FireWall.png" id="1_axo38"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pyeqt"]
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+amount = 100
+process_material = SubResource("ShaderMaterial_pyeqt")
+texture = ExtResource("1_axo38")
+visibility_rect = Rect2(-500, -100, 500, 200)

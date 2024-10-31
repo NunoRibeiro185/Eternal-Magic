@@ -1,40 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0hsm86cvsv6o"]
+[gd_scene load_steps=2 format=3 uid="uid://c0hsm86cvsv6o"]
 
-[sub_resource type="Gradient" id="Gradient_ehnkw"]
-offsets = PackedFloat32Array(0, 0.590164, 1)
-colors = PackedColorArray(0.754575, 0.649906, 0.218488, 1, 0.679899, 0.309129, 0.11191, 1, 1, 1, 1, 0.564706)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2bgtj"]
-gradient = SubResource("Gradient_ehnkw")
-
-[sub_resource type="Curve" id="Curve_oy3mx"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.903973, 0.136518), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_ii21r"]
-curve = SubResource("Curve_oy3mx")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oup6a"]
-direction = Vector3(-1, 0, 0)
-spread = 5.0
-initial_velocity_min = 185.49
-initial_velocity_max = 287.64
-gravity = Vector3(0, 0, 0)
-scale_min = 10.0
-scale_max = 10.0
-scale_curve = SubResource("CurveTexture_ii21r")
-color_ramp = SubResource("GradientTexture1D_2bgtj")
-turbulence_enabled = true
-turbulence_noise_scale = 1.211
-turbulence_noise_speed_random = 1.11
-turbulence_influence_max = 0.317
-turbulence_initial_displacement_min = -15.0
-turbulence_initial_displacement_max = 15.0
-collision_mode = 1
-collision_friction = 0.75
-collision_bounce = 0.7
+[ext_resource type="Material" uid="uid://x0r60b6k24xl" path="res://Particles/FireParticleMaterial.tres" id="1_rocw6"]
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
 amount = 300
-process_material = SubResource("ParticleProcessMaterial_oup6a")
+process_material = ExtResource("1_rocw6")
 visibility_rect = Rect2(-500, -100, 500, 200)

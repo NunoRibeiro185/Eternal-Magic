@@ -14,6 +14,9 @@ const FIRE_SHADER = preload("res://Shaders/fire_shader.gdshader")
 const FIRE = preload("res://Particles/Fire.tscn")
 const WATER = preload("res://Particles/Water.tscn")
 
+# Particle Materials
+const FIRE_PARTICLE_MATERIAL = preload("res://Particles/FireParticleMaterial.tres")
+
 # Enums
 enum Element {Neutral, Fire, Earth, Air, Water, Electric, Ice, Poison, Grass, Light, Void}
 enum Type {None, Spell, Dash}
@@ -85,3 +88,6 @@ func select_shape(spell_shape : int,  width: float, height: float) -> PackedVect
 		Shape.Cone:
 			points = draw_cone(CIRCLE_POINT_NB/4, width, height)
 	return points
+	
+func calc_particle_amount(ar: AttackResource):
+	return ar.width * ar.attack_range / 100
