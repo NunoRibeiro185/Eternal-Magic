@@ -15,10 +15,10 @@ func activate():
 		var spell = Spell.new()
 		var shape_points = Utility.select_shape(ar.shape, ar.width, ar.height)
 		var shape = Polygon2D.new()
-			
+		
 		shape.polygon = shape_points
 		spell.direction = direction.rotated(angle)
-		shape.color = get_element()
+		spell.particle = get_element().instantiate()
 		spell.ar = ar
 		
 		# Collisions
@@ -42,7 +42,8 @@ func activate():
 		spell.add_child(movement)
 		
 		# General
-		spell.add_child(shape)
+		#spell.add_child(shape)
+		spell.add_child(spell.particle)
 		
 		player.get_tree().root.call_deferred("add_child", spell)
 
@@ -51,9 +52,9 @@ func get_element():
 		Utility.Element.Neutral:
 			return Color.WHITE
 		Utility.Element.Fire:
-			return Color.ORANGE_RED
+			return Utility.FIRE
 		Utility.Element.Water:
-			return Color.DARK_BLUE
+			return Utility.WATER
 	
 func get_movement_type(spell: Spell):
 	match ar.movement_type:

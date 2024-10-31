@@ -6,6 +6,7 @@ var spell: Spell
 func _init(attack_resource: AttackResource, sp: Spell) -> void:
 	ar = attack_resource
 	spell = sp
+	spell.particle.position = Vector2(ar.height,0)
 	add_collisions()
 	
 func _physics_process(delta: float) -> void:
@@ -23,4 +24,5 @@ func add_collisions():
 		collision_shape.points = points
 		
 	collision.shape = collision_shape
+	spell.collision = collision
 	spell.add_child(collision)

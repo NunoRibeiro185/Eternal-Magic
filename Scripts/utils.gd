@@ -10,6 +10,10 @@ const COLLISION = 1
 # Shaders
 const FIRE_SHADER = preload("res://Shaders/fire_shader.gdshader")
 
+# Particles
+const FIRE = preload("res://Particles/Fire.tscn")
+const WATER = preload("res://Particles/Water.tscn")
+
 # Enums
 enum Element {Neutral, Fire, Earth, Air, Water, Electric, Ice, Poison, Grass, Light, Void}
 enum Type {None, Spell, Dash}

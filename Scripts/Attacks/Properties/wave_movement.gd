@@ -8,12 +8,13 @@ var width: float
 var height: float
 var size: float
 var original_position: Vector2
+
 func _init(attack_resource: AttackResource, sp: Spell) -> void:
 	ar = attack_resource
 	spell = sp
 	collision = spell.collision
 	original_position = spell.spawn_point
-	print("Spell global position: ", original_position)
+	
 	
 	if ar.shape == Utility.Shape.Circle:
 		width = ar.width
@@ -29,6 +30,8 @@ func _init(attack_resource: AttackResource, sp: Spell) -> void:
 		height = Utility.PLAYER_WIDTH
 		spell.collision.shape.points = Utility.select_shape(ar.shape, 0 , height)
 		spell.collision2.shape.points = Utility.select_shape(ar.shape, 0 , 0)
+		spell.particle.position = Vector2(Utility.PLAYER_WIDTH,0)
+		
 	
 	
 func _physics_process(delta: float) -> void:
@@ -48,6 +51,7 @@ func _physics_process(delta: float) -> void:
 				spell.spell_free()
 				
 		Utility.Shape.Cone:
+			spell.particle.global_position += spell.direction * ar.travel_speed * delta
 			spell.collision.shape.points = Utility.select_shape(Utility.Shape.Cone, width , height)
 			spell.collision2.shape.points = Utility.select_shape(Utility.Shape.Cone, width , max(height - Utility.PLAYER_WIDTH, 0))
 			width = lerpf(0.0, ar.width, height/ar.attack_range)
