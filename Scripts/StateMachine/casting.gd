@@ -15,7 +15,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 	timer.connect("timeout", cast_over)
 	timer.start(ar.cast_time)
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
 	print("time left: ", timer.time_left)
 	if ar.can_move_while_casting:
 		player.direction = player.get_movement()

@@ -2,6 +2,7 @@ class_name Targeting extends PlayerState
 
 var ar: AttackResource
 var previous_state: String
+var key : String
 
 var shape: Polygon2D
 var spell_manager: SpellManager
@@ -10,6 +11,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 	print("TARGETING")
 	ar = data["attack"]
 	spell_manager = data["spell_manager"]
+	key = data["key"]
 	var shape_points = Utility.select_shape(ar.shape, ar.width, ar.attack_range)
 	shape = Polygon2D.new()
 	shape.polygon = shape_points
@@ -24,7 +26,7 @@ func update(delta: float) -> void:
 	player.move_and_slide()
 	
 func handle_input(_event: InputEvent) -> void:
-	if Input.is_action_just_released("attack1") and ar.indicator.activated:
+	if Input.is_action_just_released(key) and ar.indicator.activated:
 		ar.indicator.reset()
 		finished.emit(CASTING, {"attack": ar, "spell_manager": spell_manager})
 	if Input.is_action_just_pressed("attack2"):

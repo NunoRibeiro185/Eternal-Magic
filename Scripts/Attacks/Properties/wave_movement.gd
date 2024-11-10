@@ -15,7 +15,6 @@ func _init(attack_resource: AttackResource, sp: Spell) -> void:
 	collision = spell.collision
 	original_position = spell.spawn_point
 	
-	
 	if ar.shape == Utility.Shape.Circle:
 		width = ar.width
 		height = ar.height
@@ -34,7 +33,6 @@ func _init(attack_resource: AttackResource, sp: Spell) -> void:
 		spell.particle.position = Vector2(Utility.PLAYER_WIDTH/2,0)
 		spell.particle.process_material.emission_shape # TODO CHANGE SHAPE TO RING MAYBE
 		
-	
 	
 func _physics_process(delta: float) -> void:
 	match ar.shape:

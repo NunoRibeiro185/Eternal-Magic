@@ -12,12 +12,12 @@ func _ready():
 func update_attack():
 	type = ar.type
 
-func start():
+func start(key):
 	if ar.type == Utility.Type.Dash:
 		state_machine.state.finished.emit("Dashing", {"attack" : ar})
 	if ar.type == Utility.Type.Spell:
 		if ar.delivery == Utility.Delivery.Projectile:
 			spell_manager.activate()
 		elif ar.delivery == Utility.Delivery.Skillshot:
-			state_machine.state.finished.emit("Targeting", {"attack" : ar, "spell_manager" : spell_manager})
+			state_machine.state.finished.emit("Targeting", {"attack" : ar, "spell_manager" : spell_manager, "key" : key})
 		

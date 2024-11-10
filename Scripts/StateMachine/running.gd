@@ -5,7 +5,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	print("RUNNING")
 	pass
 	
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
 	player.direction = player.get_movement()
 	player.speed = player.RUNNING_SPEED
 	player.velocity = player.direction * player.speed

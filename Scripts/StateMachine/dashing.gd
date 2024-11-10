@@ -5,6 +5,7 @@ var dashing_speed : float
 var dash_duration : float
 var direction : Vector2
 var previous_state : String
+@onready var collision: CollisionShape2D = $"../../CollisionShape2D"
 
 func enter(previous_state_path: String, data := {}) -> void:
 	ar = data["attack"]
@@ -17,6 +18,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func dash():
 	player.dashing = true
+	collision.disabled = true
 	var dash_duration_timer = Timer.new()
 	add_child(dash_duration_timer)
 	dash_duration_timer.start(dash_duration)
@@ -29,5 +31,6 @@ func physics_update(_delta: float) -> void:
 	
 func stop_dash():
 	player.dashing = false
+	collision.disabled = false
 	get_child(0).queue_free()
 	finished.emit(previous_state)
