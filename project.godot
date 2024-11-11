@@ -28,6 +28,7 @@ window/stretch/mode="viewport"
 [global_group]
 
 Enemies="Enemies"
+SpellCasters=""
 
 [input]
 
@@ -112,4 +113,4 @@ cursor_down={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Walls"
 2d_physics/layer_4="Projectiles"
-2d_physics/layer_5="Layer 5"
+2d_physics/layer_5="Drops"

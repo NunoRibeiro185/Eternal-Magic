@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ypssdppn8w6c"]
+
+[ext_resource type="Script" path="res://Scenes/Items/spell_caster.gd" id="1_1d38w"]
+
+[node name="SpellCaster" type="Area2D" groups=["SpellCasters"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_1d38w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

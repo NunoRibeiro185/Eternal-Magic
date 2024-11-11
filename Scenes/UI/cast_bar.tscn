@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://xhp3dfekg2ui"]
+
+[sub_resource type="Gradient" id="Gradient_y1ul0"]
+offsets = PackedFloat32Array(0, 0.809859)
+colors = PackedColorArray(0, 0.160784, 0.423529, 0.376471, 0.101961, 0.47451, 0.576471, 0.435294)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8rhti"]
+noise_type = 4
+frequency = 0.0001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0as3o"]
+color_ramp = SubResource("Gradient_y1ul0")
+noise = SubResource("FastNoiseLite_8rhti")
+
+[node name="CastBar" type="TextureProgressBar"]
+custom_minimum_size = Vector2(0, 20)
+offset_right = 92.0
+offset_bottom = 200.0
+scale = Vector2(1, 0.05)
+step = 0.01
+value = 100.0
+nine_patch_stretch = true
+texture_progress = SubResource("NoiseTexture2D_0as3o")

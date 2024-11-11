@@ -7,11 +7,10 @@ func _init(a : AttackResource, p : Player):
 	ar = a
 	player = p
 
-func activate():
+func activate(direction):
 	for i in range(0, ar.amount):
 		#General
 		var angle: float = (i - ar.amount/2) * Utility.calculate_angle(ar.attack_width, ar.attack_range) # radians
-		var direction = player.global_position.direction_to(player.get_global_mouse_position())
 		var spell = Spell.new()
 		var shape_points = Utility.select_shape(ar.shape, ar.width, ar.height)
 		var shape = Polygon2D.new()

@@ -9,6 +9,8 @@ noise_type = 4
 frequency = 0.0001
 
 [resource]
+width = 128
+height = 128
 in_3d_space = true
 color_ramp = SubResource("Gradient_y1ul0")
 noise = SubResource("FastNoiseLite_8rhti")

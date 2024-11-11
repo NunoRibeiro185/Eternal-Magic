@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cct1h3byshc50"]
+
+[ext_resource type="Script" path="res://Scripts/UI/spell_button.gd" id="2_qogyw"]
+[ext_resource type="Texture2D" uid="uid://cah7h8lupvf8r" path="res://Textures/IndicatorTexture.tres" id="3_kxd8u"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_1wp38"]
+
+[sub_resource type="Shortcut" id="Shortcut_hyn0q"]
+events = [SubResource("InputEventAction_1wp38")]
+
+[node name="SpellButton" type="TextureButton"]
+custom_minimum_size = Vector2(128, 0)
+offset_right = 128.0
+offset_bottom = 127.0
+shortcut = SubResource("Shortcut_hyn0q")
+ignore_texture_size = true
+script = ExtResource("2_qogyw")
+
+[node name="Cooldown" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+step = 0.01
+fill_mode = 5
+texture_progress = ExtResource("3_kxd8u")
+tint_progress = Color(0.00820202, 0.00820202, 0.00820202, 1)
+
+[node name="Input" type="Label" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 42.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

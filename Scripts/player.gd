@@ -7,7 +7,8 @@ var dashing_speed : float
 var input : Vector2
 var direction : Vector2
 var custom_cursor_pos = Vector2()
-var cursor_radius = 100  # Maximum distance from the player
+var cursor_radius = 400  # Maximum distance from the player
+var last_direction : Vector2
 
 #region onready vars
 # Moves
@@ -22,6 +23,9 @@ var cursor_radius = 100  # Maximum distance from the player
 @onready var cooldown_s_3: Timer = $Spell3/Cooldown_s3
 @onready var cooldown_s_4: Timer = $Spell4/Cooldown_s4
 @onready var cooldown_d: Timer = $Dash/Cooldown_d
+
+@onready var skill_bar: SkillBar = $UI/SkillBar
+@onready var cast_bar: VBoxContainer = $UI/CastBar
 #endregion
 
 #region Bools
@@ -38,10 +42,16 @@ var dashing := false
 
 func _ready() -> void:
 	custom_cursor_pos = global_position
+	
+func _physics_process(delta: float) -> void:
+	move_cursor(delta)
+	
 # Check for movement inputs
 func get_movement():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	if input != Vector2.ZERO:
+		last_direction = input
 	return input.normalized()
 
 # Check for abillity inputs
@@ -74,16 +84,15 @@ func get_move():
 	
 func move_cursor(delta):
 	var cursor_direction = Input.get_vector("cursor_left", "cursor_right", "cursor_up", "cursor_down")
+	print("Cursor: ", cursor_direction)
 	if cursor_direction.length() > 0.01:
-		custom_cursor_pos = cursor_direction.normalized() * cursor_radius
+		custom_cursor_pos = cursor_direction * 0.8 * cursor_radius
 		# Get the player's current global position
-		var target_position = self.get_global_transform_with_canvas().origin + round(custom_cursor_pos)
+		var target_position = self.get_global_transform_with_canvas().origin + custom_cursor_pos
 		print("Player Position:", global_position, " Target Position:", target_position)
 		# Warp the mouse to the clamped position
-		get_viewport().warp_mouse(target_position)
+		get_viewport().warp_mouse(clamp(target_position, self.get_global_transform_with_canvas().origin, target_position))
 		
-func _physics_process(delta: float) -> void:
-	move_cursor(delta)
 	
 #region Cooldown Timers
 func _on_cooldown_s_1_timeout() -> void:
@@ -101,3 +110,18 @@ func _on_cooldown_s_4_timeout() -> void:
 func _on_cooldown_d_timeout() -> void:
 	can_d = true
 #endregion
+
+func swap_spell(spell, area):
+	print("Ar before: ", spell.ar)
+	spell.ar = area.ar
+	spell.update_attack()
+	print("Ar after: ", spell.ar)
+	skill_bar.spell_button_1.texture_normal = area.sprite
+	area.queue_free()
+	
+func _on_collision(area: Area2D) -> void:
+	print("Collided")
+	if area.is_in_group("SpellCasters"):
+		print("replace first spell")
+		swap_spell(spell_1, area)
+		

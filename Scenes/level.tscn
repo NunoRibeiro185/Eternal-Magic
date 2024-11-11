@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmyqojqmtwli6"]
+[gd_scene load_steps=5 format=3 uid="uid://cmyqojqmtwli6"]
 
 [ext_resource type="PackedScene" uid="uid://cb84eu6hvtw56" path="res://Player/player.tscn" id="1_3oawk"]
 [ext_resource type="Script" path="res://Scripts/Tools/orphan_nodes.gd" id="1_eea2p"]
 [ext_resource type="PackedScene" uid="uid://4pgfcjsqojp8" path="res://Entities/testing_enemy.tscn" id="2_8h1iw"]
+[ext_resource type="PackedScene" uid="uid://bi262kl4hcn2c" path="res://Scenes/Items/SpellCasters/fire_gun.tscn" id="4_7w1sk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_eea2p")
@@ -12,5 +13,10 @@ position = Vector2(469, 323)
 
 [node name="TestingEnemy" parent="." instance=ExtResource("2_8h1iw")]
 position = Vector2(692, 220)
+
+[node name="FireGun" parent="." instance=ExtResource("4_7w1sk")]
+position = Vector2(586, 224)
+scale = Vector2(0.165, 0.165)
+collision_mask = 1
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

@@ -49,8 +49,6 @@ func _physics_process(delta: float) -> void:
 			spell.global_position += spell.direction * ar.travel_speed * delta
 			spell.particle.amount = Utility.calc_particle_amount(ar)
 			spell.particle.process_material.emission_box_extents = Vector3(ar.width * 0.05, ar.width/2, 0)
-			print("BOX: ", spell.particle.process_material.emission_box_extents)
-			print("Amount:", spell.particle.amount)
 			if original_position.distance_to(spell.global_position) >= ar.attack_range - Utility.PLAYER_WIDTH/2:
 				spell.spell_free()
 				

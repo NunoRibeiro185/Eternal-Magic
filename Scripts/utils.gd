@@ -91,3 +91,18 @@ func select_shape(spell_shape : int,  width: float, height: float) -> PackedVect
 	
 func calc_particle_amount(ar: AttackResource):
 	return ar.width * ar.attack_range / 100
+
+# Dictionary to map verbose inputs to simplified versions
+var simplified_keys = {
+	"Left Mouse Button": "LMB",
+	"Right Mouse Button": "RMB",
+	# Add other mappings as needed
+}
+
+func get_simplified_input_name(input_name: String) -> String:
+	# Check if the input is in the dictionary for special cases like mouse buttons
+	if input_name in simplified_keys:
+		return simplified_keys[input_name]
+	
+	# For keys with extra descriptors, take the first part (e.g., "Q" in "Q (Physical)")
+	return input_name.split(" ")[0]
