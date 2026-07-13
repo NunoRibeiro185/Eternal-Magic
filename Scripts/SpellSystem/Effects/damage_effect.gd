@@ -11,7 +11,10 @@ func apply(hit: HitInfo) -> void:
 	if hit.target == null:
 		return
 	var amount := base_damage * hit.stats.spell_power
-	if randf() < hit.stats.crit_chance:
+	# Gameplay roll goes through the caster-supplied RNG (never global randf) so the
+	# host game controls randomness policy — see CastContext.get_rng().
+	var rng := hit.context.get_rng() if hit.context else CastContext.default_rng()
+	if rng.randf() < hit.stats.crit_chance:
 		amount *= hit.stats.crit_multiplier
 	if hit.target.has_method("apply_damage"):
 		hit.target.apply_damage(amount, hit)

@@ -11,9 +11,15 @@ class_name CasterComponent extends Node2D
 @export var faction: int = Factions.Team.PLAYER
 @export var stats: StatBlock
 
+## This caster's randomness stream, handed to every CastContext it builds. Default is a
+## local randomized RNG (single-player). A host game wanting determinism (multiplayer,
+## replays, seeded runs) can assign a seeded/synced one — the spell code is unaffected.
+var rng := RandomNumberGenerator.new()
+
 func _ready() -> void:
 	if stats == null:
 		stats = StatBlock.new()
+	rng.randomize()
 
 ## Muzzle / spawn origin. Override by placing this component at the muzzle, or
 ## swap this for an exported Marker2D later.
@@ -27,4 +33,5 @@ func build_context(aim_direction: Vector2, aim_point := Vector2.ZERO, target: No
 	ctx.aim_direction = aim_direction.normalized()
 	ctx.aim_point = aim_point
 	ctx.target = target
+	ctx.rng = rng
 	return ctx

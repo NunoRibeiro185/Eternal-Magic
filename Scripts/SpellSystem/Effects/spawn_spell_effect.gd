@@ -17,6 +17,8 @@ func apply(hit: HitInfo) -> void:
 	if tree == null:
 		return
 	var ctx := CastContext.new(hit.source, hit.faction, hit.stats, tree)
+	if hit.context:
+		ctx.rng = hit.context.rng # keep the same randomness stream through the recursion
 	if hit.spell:
 		ctx.origin = hit.spell.global_position
 		ctx.aim_direction = hit.spell.direction if inherit_direction else Vector2.RIGHT

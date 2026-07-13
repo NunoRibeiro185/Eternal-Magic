@@ -14,8 +14,26 @@ var stats: StatBlock        ## caster's scaling stats (spell power, crit…)
 var tree: SceneTree         ## where to spawn the spell into the world
 var spawn_parent: Node      ## optional parent for spawned spells (defaults to tree.root); lets a preview SubViewport hold its own
 
+var rng: RandomNumberGenerator ## randomness source for GAMEPLAY rolls; injected by the caster (see get_rng)
+
 func _init(_caster: Node2D, _faction: int, _stats: StatBlock, _tree: SceneTree) -> void:
 	caster = _caster
 	faction = _faction
 	stats = _stats
 	tree = _tree
+
+## The randomness source effects must use for GAMEPLAY rolls (crit, spread jitter) —
+## never global randf(). This is a POLICY seam: single-player leaves the caster's default
+## RNG; a multiplayer or replay game injects a seeded/synced one and gets identical
+## results on every peer, with zero changes to the spell code. Falls back to one shared
+## randomized RNG so effects never have to null-check.
+func get_rng() -> RandomNumberGenerator:
+	return rng if rng else default_rng()
+
+static var _default_rng: RandomNumberGenerator
+
+static func default_rng() -> RandomNumberGenerator:
+	if _default_rng == null:
+		_default_rng = RandomNumberGenerator.new()
+		_default_rng.randomize()
+	return _default_rng

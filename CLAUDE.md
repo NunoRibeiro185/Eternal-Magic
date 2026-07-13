@@ -22,6 +22,36 @@ save and can drop manual additions), so prefer: create nodes in code (`add_child
 `@export`s for the human to wire in the inspector, or give the human a short editor recipe. The player's
 `Spellbook`, for example, is created in code precisely to avoid depending on a scene node.
 
+## Design principle: mechanism vs policy (keep the system reusable)
+
+`Scripts/SpellSystem/` is a **reusable library of mechanics, not a game**. The goal is that it
+drops into any project — single-player or multiplayer — without edits. To stay that way it must hold
+**mechanics** (what a spell does) and never **policy** (who may cast, when, authority, input, randomness
+source, persistence, networking). Policy belongs to the host game, which drives the library through its
+seams. Single-player is just the trivial policy (do it locally, now); multiplayer swaps the policy in and
+the library code is **identical**. Concrete rules:
+
+- **No concrete game-class references.** The runtime never names `Player` or a specific enemy — it goes
+  through `CastContext` and duck-typed contracts (`apply_damage`/`apply_status`) and int `Factions`. A
+  new caster is just another `CasterComponent`.
+- **No input reading inside the system.** The host feeds *intent* in at `Spellbook.try_cast()`; the
+  system never polls `Input`.
+- **No global RNG in gameplay.** Gameplay rolls (crit, jitter) pull from `hit.context.get_rng()` /
+  `CastContext.get_rng()` — never `randf()`/`randi()` directly. The caster supplies the RNG
+  (`CasterComponent.rng`), so a game can seed/sync it for determinism. Cosmetic randomness in `Visuals/`
+  may use global RNG freely (it isn't gameplay and isn't replicated).
+- **No networking/authority code here.** If multiplayer is ever built, the host wraps three seams — cast
+  intent (`Spellbook.try_cast`), spawn (`SpellLauncher.launch` / `CastContext.spawn_parent`), and
+  resolution/state (hit → damage → health/status), gating those to the server. Do **not** add
+  `MultiplayerSpawner`/RPC/"authority" concepts into `Scripts/SpellSystem/`.
+- **Keep state mutations funneled through their existing chokepoints** (damage, status application,
+  cooldown start, crit roll) so a host can gate them in one place. Don't scatter mutations or `randf()`
+  into new effects.
+
+The seams that make this work: `CastContext` (caster-agnostic inputs), `CastContext.spawn_parent` (where
+spawns go), `CastContext.get_rng()` (randomness), duck-typed `apply_damage`/`apply_status`, and int
+`Factions`. When adding anything, prefer a new seam over a hardcoded assumption.
+
 ## Architecture: the spell system (`Scripts/SpellSystem/`)
 
 A spell is a **`SpellDefinition`** (`spell_definition.gd`) — a `Resource` composed of swappable parts,
