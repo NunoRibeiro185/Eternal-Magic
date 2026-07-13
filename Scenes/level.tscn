@@ -4,6 +4,13 @@
 [ext_resource type="Script" uid="uid://bbeu0q11lgdbc" path="res://Scripts/Tools/orphan_nodes.gd" id="1_eea2p"]
 [ext_resource type="PackedScene" uid="uid://4pgfcjsqojp8" path="res://Entities/testing_enemy.tscn" id="2_8h1iw"]
 [ext_resource type="PackedScene" uid="uid://bi262kl4hcn2c" path="res://Scenes/Items/SpellCasters/fire_gun.tscn" id="4_7w1sk"]
+[ext_resource type="Script" uid="uid://bs8k3hy7mty46" path="res://Scripts/SpellSystem/Effects/spell_effect.gd" id="5_8c0lf"]
+[ext_resource type="Script" uid="uid://c42y3e5o5dcv2" path="res://Scripts/SpellSystem/spell_definition.gd" id="6_754fn"]
+[ext_resource type="Script" uid="uid://16v715qltp2m" path="res://Scripts/SpellSystem/Visuals/spell_visual.gd" id="7_bvt00"]
+
+[sub_resource type="Resource" id="Resource_qogk1"]
+script = ExtResource("6_754fn")
+metadata/_custom_type_script = "uid://c42y3e5o5dcv2"
 
 [node name="Level" type="Node2D" unique_id=1392272208]
 script = ExtResource("1_eea2p")
@@ -17,5 +24,6 @@ position = Vector2(692, 220)
 [node name="FireGun" parent="." unique_id=786206523 instance=ExtResource("4_7w1sk")]
 position = Vector2(586, 224)
 scale = Vector2(0.165, 0.165)
+definition = SubResource("Resource_qogk1")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

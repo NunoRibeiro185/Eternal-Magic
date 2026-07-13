@@ -1,3 +1,4 @@
+@abstract
 class_name SpellMovement extends Resource
 
 ## Base for how a spell moves/behaves each physics frame. Override step(). The

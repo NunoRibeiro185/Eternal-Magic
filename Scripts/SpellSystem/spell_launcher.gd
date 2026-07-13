@@ -23,10 +23,13 @@ static func launch(def: SpellDefinition, ctx: CastContext) -> void:
 	if def.shape == null:
 		return
 
-	var pattern: EmissionPattern = def.emission if def.emission else EmissionPattern.new()
+	# Spells parent under the caster-supplied node if given (e.g. a preview SubViewport
+	# world), otherwise the window root as before.
+	var parent: Node = ctx.spawn_parent if ctx.spawn_parent else ctx.tree.root
+	var pattern: EmissionPattern = def.emission if def.emission else SinglePattern.new()
 	for entry in pattern.emit(ctx):
 		var spell := RuntimeSpell.new()
 		var dir: Vector2 = ctx.aim_direction.rotated(entry["angle"])
 		spell.setup(def, ctx, dir)
 		spell.position = ctx.origin + entry["offset"]
-		ctx.tree.root.call_deferred("add_child", spell)
+		parent.call_deferred("add_child", spell)

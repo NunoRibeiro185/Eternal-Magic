@@ -1,3 +1,4 @@
+@abstract
 class_name SpellVisual extends Resource
 
 ## Base for a composable visual layer. A SpellDefinition holds Array[SpellVisual], so

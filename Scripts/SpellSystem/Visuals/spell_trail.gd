@@ -1,8 +1,8 @@
 class_name SpellTrail extends Line2D
 
-## A world-space ribbon that records a moving spell's recent positions. It lives at
-## the tree root (not under the spell), so when the spell dies the trail recedes and
-## fades instead of popping. Created and styled by TrailVisual.
+## A world-space ribbon that records a moving spell's recent positions. It lives in the
+## spell's world as a sibling (not under the spell), so when the spell dies the trail
+## recedes and fades instead of popping. Created and styled by TrailVisual.
 
 var target: Node2D    ## the spell we trail behind
 var max_points := 20  ## history length

@@ -5,7 +5,7 @@ class_name DamageEffect extends SpellEffect
 ## during integration (it currently reads spell.ar directly).
 
 @export var base_damage := 1.0
-@export var element: int = 0 ## Utility.Element
+@export_enum("Neutral", "Fire", "Earth", "Air", "Water", "Electric", "Ice", "Poison", "Grass", "Light", "Void") var element: int = 0
 
 func apply(hit: HitInfo) -> void:
 	if hit.target == null:

@@ -86,9 +86,47 @@ static func _ember() -> SpawnOnTickStatus:
 	s.spell = _ember_nova()
 	return s
 
+## DEMO of the crafting model: this spell is NOT authored — it is ASSEMBLED from parts,
+## the same way a player's collected components will build one at runtime. Each line is
+## a "collectible": a bolt form, a fire element, base damage, a burn, then two modifiers
+## (+projectiles, ×speed). Swap/add parts and the spell changes with no bespoke code.
+static func recipe_demo() -> SpellDefinition:
+	var recipe := SpellRecipe.new()
+
+	var form := FormComponent.new()
+	var shape := CircleHitShape.new()
+	shape.radius = 12.0
+	form.shape = shape
+	var move := StraightMovement.new()
+	move.speed = 400.0
+	form.movement = move
+	recipe.components.append(form)
+
+	var elem := ElementComponent.new()
+	elem.element = Utility.Element.Fire
+	recipe.components.append(elem)
+
+	var dmg := DamageComponent.new()
+	dmg.base_damage = 6.0
+	recipe.components.append(dmg)
+
+	var burn := AfflictionComponent.new()
+	burn.status = _burn()
+	recipe.components.append(burn)
+
+	var multi := MultishotModifier.new()
+	multi.extra_projectiles = 2
+	recipe.components.append(multi)
+
+	var faster := SpeedModifier.new()
+	faster.multiplier = 1.5
+	recipe.components.append(faster)
+
+	return recipe.build()
+
 static func player_loadout() -> Array[SpellDefinition]:
 	var loadout: Array[SpellDefinition] = []
-	loadout.append(fire_fan())        # 1: spread of straight bolts
+	loadout.append(recipe_demo())     # 1: ASSEMBLED FROM PARTS (crafting demo)
 	loadout.append(flame_cone())      # 2: expanding cast-time cone
 	loadout.append(piercing_lance())  # 3: fast piercing wedge (ice-coloured)
 	loadout.append(fire_burst())      # 4: bolt that bursts into a nova (recursion)

@@ -26,7 +26,7 @@ class_name SpellDefinition extends Resource
 @export var pierce := false  ## keep going after a hit
 
 @export_group("Presentation")
-@export var element: int = 0 ## Utility.Element — drives the default palette
+@export_enum("Neutral", "Fire", "Earth", "Air", "Water", "Electric", "Ice", "Poison", "Grass", "Light", "Void") var element: int = 0 ## drives the default palette
 @export var style: ElementStyle ## optional explicit palette (overrides element default)
 @export var visuals: Array[SpellVisual] = [] ## stacked visual layers (fill / particles / trail…)
 @export var particle_scene: PackedScene

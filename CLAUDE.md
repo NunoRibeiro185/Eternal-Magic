@@ -29,14 +29,20 @@ each its own `Resource` base class with concrete subclasses:
 
 | Slot | Base (`.gd`) | Subclasses | Role |
 |------|------|------------|------|
-| Emission | `EmissionPattern` | `FanPattern` | how many sub-spells + their angle/offset |
+| Emission | `EmissionPattern` | `SinglePattern`, `FanPattern`, `RingPattern`, `LinePattern` | how many sub-spells + their angle/offset |
 | Shape | `HitShape` | `CircleHitShape`, `ConeHitShape`, `RectangleHitShape`, `TriangleHitShape` | hitbox geometry, built once |
-| Movement | `SpellMovement` | `StraightMovement`, `ExpandMovement` | per-physics-frame behaviour |
+| Movement | `SpellMovement` | `StraightMovement`, `ExpandMovement`, `WaveMovement`, `AccelerateMovement`, `StationaryMovement`, `HomingMovement` | per-physics-frame behaviour |
 | Effects | `SpellEffect` | `DamageEffect`, `SpawnSpellEffect`, `DashEffect`, `ApplyStatusEffect` | what happens on cast/hit/expire |
 | Status | `StatusEffect` | `DamageOverTimeStatus`, `MovementStatus`, `SpawnOnTickStatus` | lingering effect attached to a target (burn / slow-stun / periodic re-cast) |
 
 To add a mechanic, add a subclass in the relevant folder (`Emission/`, `Shapes/`, `Movement/`,
 `Effects/`) and override its one virtual method — no central switch to touch.
+
+Each slot's **base class is `@abstract`** (`EmissionPattern`, `HitShape`, `SpellMovement`, `SpellEffect`,
+`StatusEffect`, `SpellVisual`, `SpellComponent`) so the inspector's "New" picker on a slot offers only
+the concrete options — the bases don't clutter authoring and can't be instantiated (the emission default
+is `SinglePattern`, not the base). `element` fields use `@export_enum(...)` (the `Utility.Element` names)
+so they show a named dropdown rather than a raw int, since `Utility` is an autoload, not a type.
 
 ### Cast flow
 

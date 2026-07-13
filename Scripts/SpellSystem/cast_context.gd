@@ -12,6 +12,7 @@ var target: Node2D          ## optional locked target (homing / unit-target)
 var faction: int            ## Factions.Team — drives friend/foe collision
 var stats: StatBlock        ## caster's scaling stats (spell power, crit…)
 var tree: SceneTree         ## where to spawn the spell into the world
+var spawn_parent: Node      ## optional parent for spawned spells (defaults to tree.root); lets a preview SubViewport hold its own
 
 func _init(_caster: Node2D, _faction: int, _stats: StatBlock, _tree: SceneTree) -> void:
 	caster = _caster

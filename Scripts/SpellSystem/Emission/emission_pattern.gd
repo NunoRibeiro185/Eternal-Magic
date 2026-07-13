@@ -1,3 +1,4 @@
+@abstract
 class_name EmissionPattern extends Resource
 
 ## Base for how many sub-spells spawn and where. Override emit() to return one

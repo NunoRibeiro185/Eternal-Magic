@@ -35,5 +35,6 @@ func attach(spell: RuntimeSpell, style: ElementStyle, _root: Node2D) -> void:
 	additive.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	trail.material = additive
 
-	# World-space: parent to the tree root so it survives the spell's death.
-	spell.get_tree().root.call_deferred("add_child", trail)
+	# World-space: parent to the spell's world (not the window root) so it renders in the
+	# right viewport (e.g. the editor preview) and survives the spell's death.
+	spell.spawn_world().call_deferred("add_child", trail)

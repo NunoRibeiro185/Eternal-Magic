@@ -54,6 +54,14 @@ func _physics_process(delta: float) -> void:
 	if age >= definition.lifetime or traveled >= definition.max_range:
 		_expire()
 
+## The world this spell was spawned into (the game root, or a preview SubViewport).
+## World-space visuals (trail, impact burst) parent HERE, not the window root, so they
+## render in the right viewport and survive the spell's death as siblings. The parent is
+## identity-transform in both cases, so their "local == global" assumption still holds.
+func spawn_world() -> Node:
+	var p := get_parent()
+	return p if p else get_tree().root
+
 ## Called by ExpandMovement — scales the hitbox (and its matching visual) in place.
 func apply_hit_scale() -> void:
 	if _collision:

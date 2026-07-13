@@ -1,3 +1,4 @@
+@abstract
 class_name StatusEffect extends Resource
 
 ## A lingering effect attached to a target (burn, poison, chill, shock…). Like the
@@ -11,7 +12,7 @@ class_name StatusEffect extends Resource
 
 @export var duration := 3.0     ## seconds the status lives on the target
 @export var interval := 0.5     ## seconds between on_tick calls; <= 0 = no periodic tick
-@export var element: int = 0    ## Utility.Element — for coloured feedback / future resistances
+@export_enum("Neutral", "Fire", "Earth", "Air", "Water", "Electric", "Ice", "Poison", "Grass", "Light", "Void") var element: int = 0 ## coloured feedback / future resistances
 
 ## Fired once when the status is attached.
 func on_apply(_status: RuntimeStatus) -> void:

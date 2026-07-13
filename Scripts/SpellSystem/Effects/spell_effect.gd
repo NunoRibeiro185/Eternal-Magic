@@ -1,3 +1,4 @@
+@abstract
 class_name SpellEffect extends Resource
 
 ## Base for anything a spell DOES when it resolves. Override apply(). Effects are

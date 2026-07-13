@@ -1,3 +1,4 @@
+@abstract
 class_name HitShape extends Resource
 
 ## Base for hitbox geometry. Override build_shape() to return a Shape2D built ONCE
