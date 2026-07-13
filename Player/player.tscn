@@ -1,197 +1,20 @@
-[gd_scene load_steps=32 format=3 uid="uid://cb84eu6hvtw56"]
+[gd_scene format=3 uid="uid://cb84eu6hvtw56"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_3aujx"]
+[ext_resource type="Script" uid="uid://d15qqa0ktklob" path="res://Scripts/player.gd" id="1_3aujx"]
 [ext_resource type="Texture2D" uid="uid://bawch2x5leakq" path="res://icon.svg" id="1_riasp"]
-[ext_resource type="Script" path="res://Scripts/Attacks/attack.gd" id="3_ga6wc"]
-[ext_resource type="Script" path="res://Scripts/Attacks/attack_resource.gd" id="4_olwd7"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="6_wb2ro"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/idle.gd" id="7_1kgd0"]
+[ext_resource type="Script" uid="uid://bu4cj6wtvisr0" path="res://Scripts/StateMachine/state_machine.gd" id="6_wb2ro"]
+[ext_resource type="Script" uid="uid://cox3na1hq5u76" path="res://Scripts/StateMachine/idle.gd" id="7_1kgd0"]
 [ext_resource type="PackedScene" uid="uid://b8vdklslco2kr" path="res://Scenes/Components/health_component.tscn" id="7_7f45l"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/running.gd" id="8_487jh"]
+[ext_resource type="Script" uid="uid://ciciea8qcaih5" path="res://Scripts/StateMachine/running.gd" id="8_487jh"]
 [ext_resource type="PackedScene" uid="uid://df0rulc3gre6g" path="res://Scenes/Components/hitbox_component.tscn" id="8_rokpd"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/dashing.gd" id="9_i76bh"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/casting.gd" id="10_tulnk"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/targeting.gd" id="11_lro6b"]
-[ext_resource type="Script" path="res://Scripts/UI/skill_bar.gd" id="15_8o6xm"]
+[ext_resource type="Script" uid="uid://kjg0t8qh2rfo" path="res://Scripts/StateMachine/dashing.gd" id="9_i76bh"]
+[ext_resource type="Script" uid="uid://c8a2l26inflh0" path="res://Scripts/UI/skill_bar.gd" id="15_8o6xm"]
 [ext_resource type="PackedScene" uid="uid://cct1h3byshc50" path="res://Scenes/UI/spell_button.tscn" id="15_f6gth"]
+[ext_resource type="Script" uid="uid://lk3ya6511n6u" path="res://Scripts/SpellSystem/caster_component.gd" id="15_lfmf2"]
+[ext_resource type="Script" uid="uid://dmmhxtrt6oqr8" path="res://Scripts/SpellSystem/stat_block.gd" id="16_pisgm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3uqf"]
 size = Vector2(36, 7)
-
-[sub_resource type="Resource" id="Resource_1gknm"]
-script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 500.0
-width = 300.0
-height = 0.0
-amount = 3
-attack_width = 1.0
-attack_range = 300.0
-has_range = false
-duration = 5.0
-has_duration = false
-cooldown = 2.0
-charges = 1
-cast_time = 1.0
-can_move_while_casting = true
-element = 1
-type = 1
-delivery = 5
-shape = 5
-movement_type = 1
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
-
-[sub_resource type="Resource" id="Resource_ltnip"]
-script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 300.0
-width = 500.0
-height = 0.0
-amount = 1
-attack_width = 500.0
-attack_range = 500.0
-has_range = false
-duration = 5.0
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 1.0
-can_move_while_casting = true
-element = 1
-type = 1
-delivery = 5
-shape = 1
-movement_type = 1
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
-
-[sub_resource type="Resource" id="Resource_78ck7"]
-script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 500.0
-width = 10.0
-height = 20.0
-amount = 1
-attack_width = 100.0
-attack_range = 750.0
-has_range = false
-duration = 2.5
-has_duration = true
-cooldown = 0.25
-charges = -1
-cast_time = 2.5
-can_move_while_casting = false
-element = 1
-type = 1
-delivery = 1
-shape = 2
-movement_type = 2
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
-
-[sub_resource type="Resource" id="Resource_yr4si"]
-script = ExtResource("4_olwd7")
-base_value = 1.0
-multiplier = 1.0
-travel_speed = 50.0
-width = 1.0
-height = 1.0
-amount = 1
-attack_width = 1.0
-attack_range = 200.0
-has_range = false
-duration = 5.0
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 0.0
-can_move_while_casting = false
-element = 1
-type = 1
-delivery = 1
-shape = 3
-movement_type = 0
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
-
-[sub_resource type="Resource" id="Resource_umxlb"]
-script = ExtResource("4_olwd7")
-base_value = 1500.0
-multiplier = 1.0
-travel_speed = 1.0
-width = 1.0
-height = 1.0
-amount = 1
-attack_width = 1.0
-attack_range = 1.0
-has_range = false
-duration = 0.2
-has_duration = false
-cooldown = 1.0
-charges = 1
-cast_time = 0.0
-can_move_while_casting = false
-element = 0
-type = 2
-delivery = 2
-shape = 0
-movement_type = 0
-buff = Array[int]([])
-debuff = Array[int]([])
-buff_duration = Array[float]([])
-debuff_duration = Array[float]([])
-bounce = false
-max_bounce_distance = 1.0
-max_bounces = 1
-bounce_damage = 0.3
-pierce = false
-pierce_damage = 0.3
-homing = false
-impact = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lo713"]
 size = Vector2(38, 38)
@@ -226,102 +49,65 @@ action = &"dash"
 [sub_resource type="Shortcut" id="Shortcut_k6fle"]
 events = [SubResource("InputEventAction_s61f8")]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="Resource" id="Resource_bhunq"]
+script = ExtResource("16_pisgm")
+metadata/_custom_type_script = "uid://dmmhxtrt6oqr8"
+
+[node name="Player" type="CharacterBody2D" unique_id=1882480447]
 z_index = 1000
 collision_mask = 22
 script = ExtResource("1_3aujx")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1461589335]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=101071923]
 position = Vector2(1.19209e-06, 1.19209e-06)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_riasp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=858790817]
 position = Vector2(0, 15.5)
 shape = SubResource("RectangleShape2D_v3uqf")
 
-[node name="Spell1" type="Node2D" parent="."]
-script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_1gknm")
-
-[node name="Cooldown_s1" type="Timer" parent="Spell1"]
-one_shot = true
-
-[node name="Spell2" type="Node2D" parent="."]
-script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_ltnip")
-
-[node name="Cooldown_s2" type="Timer" parent="Spell2"]
-one_shot = true
-
-[node name="Spell3" type="Node2D" parent="."]
-script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_78ck7")
-
-[node name="Cooldown_s3" type="Timer" parent="Spell3"]
-one_shot = true
-
-[node name="Spell4" type="Node2D" parent="."]
-script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_yr4si")
-
-[node name="Cooldown_s4" type="Timer" parent="Spell4"]
-one_shot = true
-
-[node name="Dash" type="Node2D" parent="."]
-script = ExtResource("3_ga6wc")
-ar = SubResource("Resource_umxlb")
-
-[node name="Cooldown_d" type="Timer" parent="Dash"]
-one_shot = true
-
-[node name="HealthComponent" parent="." instance=ExtResource("7_7f45l")]
+[node name="HealthComponent" parent="." unique_id=702632278 instance=ExtResource("7_7f45l")]
 MAX_HEALTH = 100.0
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_rokpd")]
+[node name="HitboxComponent" parent="." unique_id=365594209 node_paths=PackedStringArray("health_component") instance=ExtResource("8_rokpd")]
 collision_mask = 18
 health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent" unique_id=1714790061]
 shape = SubResource("RectangleShape2D_lo713")
 
-[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="State Machine" type="Node" parent="." unique_id=2064922772 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_wb2ro")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="State Machine"]
+[node name="Idle" type="Node" parent="State Machine" unique_id=2072467152]
 script = ExtResource("7_1kgd0")
 
-[node name="Running" type="Node" parent="State Machine"]
+[node name="Running" type="Node" parent="State Machine" unique_id=1864601134]
 script = ExtResource("8_487jh")
 
-[node name="Dashing" type="Node" parent="State Machine"]
+[node name="Dashing" type="Node" parent="State Machine" unique_id=996597995]
 script = ExtResource("9_i76bh")
 
-[node name="Casting" type="Node" parent="State Machine"]
-script = ExtResource("10_tulnk")
+[node name="Hurt" type="Node" parent="State Machine" unique_id=146091966]
 
-[node name="Targeting" type="Node" parent="State Machine"]
-script = ExtResource("11_lro6b")
+[node name="Dead" type="Node" parent="State Machine" unique_id=426509350]
 
-[node name="Hurt" type="Node" parent="State Machine"]
+[node name="Root" type="Node" parent="State Machine" unique_id=2051813904]
 
-[node name="Dead" type="Node" parent="State Machine"]
+[node name="Stunned" type="Node" parent="State Machine" unique_id=932796049]
 
-[node name="Root" type="Node" parent="State Machine"]
+[node name="Silenced" type="Node" parent="State Machine" unique_id=1198430576]
 
-[node name="Stunned" type="Node" parent="State Machine"]
-
-[node name="Silenced" type="Node" parent="State Machine"]
-
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1354873043]
 offset = Vector2(270.845, 357.38)
 scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 270.845, 357.38)
 
-[node name="CastBar" type="VBoxContainer" parent="UI"]
+[node name="CastBar" type="VBoxContainer" parent="UI" unique_id=534289410]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -334,7 +120,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="SkillBar" type="HBoxContainer" parent="UI"]
+[node name="SkillBar" type="HBoxContainer" parent="UI" unique_id=385699611]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -348,39 +134,29 @@ grow_vertical = 0
 pivot_offset = Vector2(4.085, 0)
 script = ExtResource("15_8o6xm")
 
-[node name="SpellButton1" parent="UI/SkillBar" node_paths=PackedStringArray("timer") instance=ExtResource("15_f6gth")]
+[node name="SpellButton1" parent="UI/SkillBar" unique_id=44295903 instance=ExtResource("15_f6gth")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_cfb7y")
-timer = NodePath("../../../Spell1/Cooldown_s1")
 
-[node name="SpellButton2" parent="UI/SkillBar" node_paths=PackedStringArray("timer") instance=ExtResource("15_f6gth")]
+[node name="SpellButton2" parent="UI/SkillBar" unique_id=489270559 instance=ExtResource("15_f6gth")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_cvpln")
-timer = NodePath("../../../Spell2/Cooldown_s2")
 
-[node name="SpellButton3" parent="UI/SkillBar" node_paths=PackedStringArray("timer") instance=ExtResource("15_f6gth")]
+[node name="SpellButton3" parent="UI/SkillBar" unique_id=1387651471 instance=ExtResource("15_f6gth")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_e8m1p")
-timer = NodePath("../../../Spell3/Cooldown_s3")
 
-[node name="SpellButton4" parent="UI/SkillBar" node_paths=PackedStringArray("timer") instance=ExtResource("15_f6gth")]
+[node name="SpellButton4" parent="UI/SkillBar" unique_id=2003808714 instance=ExtResource("15_f6gth")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_dhohy")
-timer = NodePath("../../../Spell4/Cooldown_s4")
 
-[node name="SpellButton5" parent="UI/SkillBar" node_paths=PackedStringArray("timer") instance=ExtResource("15_f6gth")]
+[node name="SpellButton5" parent="UI/SkillBar" unique_id=1367254517 instance=ExtResource("15_f6gth")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_k6fle")
-timer = NodePath("../../../Dash/Cooldown_d")
 
-[connection signal="timeout" from="Spell1/Cooldown_s1" to="." method="_on_cooldown_s_1_timeout"]
-[connection signal="timeout" from="Spell1/Cooldown_s1" to="UI/SkillBar" method="_on_cooldown_s1_timeout"]
-[connection signal="timeout" from="Spell2/Cooldown_s2" to="." method="_on_cooldown_s_2_timeout"]
-[connection signal="timeout" from="Spell2/Cooldown_s2" to="UI/SkillBar" method="_on_cooldown_s2_timeout"]
-[connection signal="timeout" from="Spell3/Cooldown_s3" to="." method="_on_cooldown_s_3_timeout"]
-[connection signal="timeout" from="Spell3/Cooldown_s3" to="UI/SkillBar" method="_on_cooldown_s3_timeout"]
-[connection signal="timeout" from="Spell4/Cooldown_s4" to="." method="_on_cooldown_s_4_timeout"]
-[connection signal="timeout" from="Spell4/Cooldown_s4" to="UI/SkillBar" method="_on_cooldown_s4_timeout"]
-[connection signal="timeout" from="Dash/Cooldown_d" to="." method="_on_cooldown_d_timeout"]
-[connection signal="timeout" from="Dash/Cooldown_d" to="UI/SkillBar" method="_on_cooldown_d_timeout"]
+[node name="CasterComponent" type="Node2D" parent="." unique_id=1306648161]
+script = ExtResource("15_lfmf2")
+stats = SubResource("Resource_bhunq")
+metadata/_custom_type_script = "uid://lk3ya6511n6u"
+
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_collision"]

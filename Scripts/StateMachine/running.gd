@@ -10,7 +10,7 @@ func physics_update(delta: float) -> void:
 	player.speed = player.RUNNING_SPEED
 	player.velocity = player.direction * player.speed
 	player.move_and_slide()
-	player.get_move()
+	player.poll_ability_input()
 	
 	if is_equal_approx(player.direction.x, 0.0) and is_equal_approx(player.direction.y, 0.0):
 		finished.emit(IDLE)

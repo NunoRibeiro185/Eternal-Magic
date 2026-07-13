@@ -10,5 +10,5 @@ func physics_update(_delta: float) -> void:
 	if player.direction: 
 		finished.emit(RUNNING)
 	else:
-		player.get_move() 
+		player.poll_ability_input()
 	player.move_and_slide()

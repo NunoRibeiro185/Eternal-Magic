@@ -1,6 +1,9 @@
 class_name Dashing extends PlayerState
 
-var ar : AttackResource
+## Dash locomotion state. No longer knows about AttackResource — it receives raw
+## speed/duration from Player.perform_dash (driven by a DashEffect on a spell), and
+## dashes in the player's movement direction.
+
 var dashing_speed : float
 var dash_duration : float
 var direction : Vector2
@@ -9,11 +12,10 @@ var previous_state : String
 @onready var collision_shape_2: CollisionShape2D = $"../../HitboxComponent/CollisionShape2D2"
 
 func enter(previous_state_path: String, data := {}) -> void:
-	ar = data["attack"]
-	dashing_speed = ar.base_value
-	dash_duration = ar.duration
+	dashing_speed = data.get("speed", 750.0)
+	dash_duration = data.get("duration", 0.2)
 	direction = player.get_movement()
-	if player.get_movement() == Vector2.ZERO:
+	if direction == Vector2.ZERO:
 		direction = player.last_direction
 	previous_state = previous_state_path
 	print("DASHING")
@@ -27,12 +29,12 @@ func dash():
 	add_child(dash_duration_timer)
 	dash_duration_timer.start(dash_duration)
 	dash_duration_timer.connect("timeout", stop_dash)
-	
+
 func physics_update(_delta: float) -> void:
 	player.velocity = direction * dashing_speed
-	player.get_move()
+	player.poll_ability_input()
 	player.move_and_slide()
-	
+
 func stop_dash():
 	player.dashing = false
 	collision.disabled = false

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0hsm86cvsv6o"]
+[gd_scene format=3 uid="uid://c0hsm86cvsv6o"]
 
 [ext_resource type="Material" uid="uid://x0r60b6k24xl" path="res://Particles/FireParticleMaterial.tres" id="1_rocw6"]
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=2052132836]
 amount = 300
-process_material = ExtResource("1_rocw6")
 visibility_rect = Rect2(-500, -100, 500, 200)
+process_material = ExtResource("1_rocw6")

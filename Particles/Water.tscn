@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gsmnpsiy557r"]
+[gd_scene format=3 uid="uid://gsmnpsiy557r"]
 
 [ext_resource type="Texture2D" uid="uid://tvrg558d8oa7" path="res://Textures/Water2.png" id="1_23pml"]
 
@@ -54,11 +54,11 @@ collision_mode = 1
 collision_friction = 0.75
 collision_bounce = 0.7
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1328675791]
 amount = 350
-process_material = SubResource("ParticleProcessMaterial_oup6a")
 texture = ExtResource("1_23pml")
 lifetime = 0.5
 speed_scale = 0.5
 visibility_rect = Rect2(-500, -100, 500, 200)
 trail_lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_oup6a")

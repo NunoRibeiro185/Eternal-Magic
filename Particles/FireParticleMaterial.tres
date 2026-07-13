@@ -1,4 +1,4 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://x0r60b6k24xl"]
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://x0r60b6k24xl"]
 
 [sub_resource type="Gradient" id="Gradient_ehnkw"]
 offsets = PackedFloat32Array(0, 0.590164, 1)
@@ -15,11 +15,13 @@ point_count = 2
 curve = SubResource("Curve_oy3mx")
 
 [resource]
+lifetime_randomness = 0.81
 emission_shape = 6
 emission_ring_axis = Vector3(1, 0, 10)
 emission_ring_height = 0.0
 emission_ring_radius = 10.0
 emission_ring_inner_radius = 5.0
+emission_ring_cone_angle = 90.0
 direction = Vector3(-1, 0, 0)
 spread = 5.0
 initial_velocity_min = 185.49

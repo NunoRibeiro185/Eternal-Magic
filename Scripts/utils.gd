@@ -88,9 +88,6 @@ func select_shape(spell_shape : int,  width: float, height: float) -> PackedVect
 		Shape.Cone:
 			points = draw_cone(CIRCLE_POINT_NB/4, width, height)
 	return points
-	
-func calc_particle_amount(ar: AttackResource):
-	return ar.width * ar.attack_range / 100
 
 # Dictionary to map verbose inputs to simplified versions
 var simplified_keys = {

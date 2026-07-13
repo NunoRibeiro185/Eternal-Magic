@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://dkisrp12ql7ii"]
+[gd_resource type="VisualShader" format=3 uid="uid://dkisrp12ql7ii"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_wcy77"]
 parameter_name = "Ball_Color"
@@ -28,50 +28,6 @@ operator = 2
 function = 31
 
 [resource]
-code = "shader_type canvas_item;
-render_mode blend_mix, unshaded;
-
-uniform vec4 Ball_Color : source_color;
-
-
-
-void fragment() {
-// ColorParameter:2
-	vec4 n_out2p0 = Ball_Color;
-
-
-// Input:3
-	vec2 n_out3p0 = UV;
-
-
-// Vector2Constant:4
-	vec2 n_out4p0 = vec2(0.500000, 0.500000);
-
-
-// VectorOp:5
-	vec2 n_out5p0 = n_out3p0 - n_out4p0;
-
-
-// VectorLen:6
-	float n_out6p0 = length(n_out5p0);
-
-
-// FloatOp:7
-	float n_in7p1 = 3.50000;
-	float n_out7p0 = n_out6p0 * n_in7p1;
-
-
-// FloatFunc:8
-	float n_out8p0 = 1.0 - n_out7p0;
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out2p0.xyz);
-	COLOR.a = n_out8p0;
-
-
-}
-"
 mode = 1
 flags/unshaded = true
 flags/light_only = false
