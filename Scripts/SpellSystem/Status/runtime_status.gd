@@ -42,11 +42,12 @@ func is_expired() -> bool:
 ## Convenience for damage-dealing statuses: routes through the host's HealthComponent
 ## with a HitInfo that preserves the original caster's attribution and stats.
 func deal_damage(amount: float) -> void:
-	if host == null or host.health_component == null:
+	var sink: Node = host.health_component if host else null
+	if sink == null or not sink.has_method("apply_damage"):
 		return
 	var hit := HitInfo.new()
 	hit.source = source
 	hit.faction = faction
 	hit.stats = stats
-	hit.target = host.health_component
-	host.health_component.apply_damage(amount, hit)
+	hit.target = sink as Node2D
+	sink.call("apply_damage", amount, hit)

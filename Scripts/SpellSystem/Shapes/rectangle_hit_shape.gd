@@ -8,8 +8,8 @@ class_name RectangleHitShape extends HitShape
 
 func build_shape() -> Shape2D:
 	var s := ConvexPolygonShape2D.new()
-	s.points = Utility.draw_rectangle(width, length)
+	s.points = SpellUtil.draw_rectangle(width, length)
 	return s
 
 func build_polygon() -> PackedVector2Array:
-	return Utility.draw_rectangle(width, length)
+	return SpellUtil.draw_rectangle(width, length)

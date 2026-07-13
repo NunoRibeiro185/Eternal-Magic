@@ -71,8 +71,14 @@ To add a mechanic, add a subclass in the relevant folder (`Emission/`, `Shapes/`
 Each slot's **base class is `@abstract`** (`EmissionPattern`, `HitShape`, `SpellMovement`, `SpellEffect`,
 `StatusEffect`, `SpellVisual`, `SpellComponent`) so the inspector's "New" picker on a slot offers only
 the concrete options — the bases don't clutter authoring and can't be instantiated (the emission default
-is `SinglePattern`, not the base). `element` fields use `@export_enum(...)` (the `Utility.Element` names)
-so they show a named dropdown rather than a raw int, since `Utility` is an autoload, not a type.
+is `SinglePattern`, not the base). `element` fields use `@export_enum(...)` (the element names) so they
+show a named dropdown rather than a raw int.
+
+The package owns **`SpellUtil`** (`spell_util.gd`) — the `Element` enum and the shape geometry
+(`draw_circle`/`draw_cone`/`draw_rectangle`). This is deliberate: `Scripts/SpellSystem/` depends on **no
+host autoload**, so the whole folder is self-contained and portable to another project (see the
+mechanism-vs-policy section). Never reintroduce a `Utility.`-autoload dependency inside the package —
+add to `SpellUtil` instead.
 
 ### Cast flow
 
@@ -93,7 +99,9 @@ Caster (Player/Enemy) has a CasterComponent + a Spellbook
 - **`Factions`** (`factions.gd`) — `apply_targeting(spell, faction)` sets a spawned spell's collision
   layer/mask from the caster's faction (it clears the Area2D defaults first, then sets Projectiles layer
   + Walls + hostile faction). Same `SpellDefinition` hits enemies for the player and the player for an
-  enemy. Physics layers: `1=Player, 2=Enemies, 3=Walls, 4=Projectiles, 5=Drops`.
+  enemy. Physics layers: `1=Player, 2=Enemies, 3=Walls, 4=Projectiles, 5=Drops` — the `Factions.LAYER_*`
+  are `static var` (not const), so a host project with different layer numbers remaps them at startup
+  instead of editing the package.
 - **`SpawnSpellEffect`** casts another `SpellDefinition` from the point of resolution — the recursion
   that makes nested/combo spells fall out of composition (e.g. bolt → on_expire → expanding nova).
 - **`RuntimeSpell`** (`runtime_spell.gd`) holds all per-instance state (age, traveled, hit_scale, hit
@@ -128,7 +136,8 @@ movement/shape resources it is stateless and shared; per-instance state (time le
 caster attribution) lives in a **`RuntimeStatus`** wrapper — the same stateless-resource + runtime-holder
 split as `SpellMovement`/`RuntimeSpell`. Applications **stack independently**: each hit adds its own
 `RuntimeStatus` on its own clock. A **`StatusComponent`** (drop it under an entity; it auto-finds the
-sibling `HealthComponent`) hosts and ticks them in `_physics_process`. **`ApplyStatusEffect`** is the
+sibling damage sink — any node with `apply_damage`, duck-typed so the package needs no concrete
+`HealthComponent`) hosts and ticks them in `_physics_process`. **`ApplyStatusEffect`** is the
 `on_hit` `SpellEffect` that attaches one — resolved via the same duck-typed `has_method("apply_status")`
 seam as damage (`HitboxComponent` forwards to its `StatusComponent`). Burn/frost are one
 `DamageOverTimeStatus` subclass authored as different data, not a class each — a new *kind* of status

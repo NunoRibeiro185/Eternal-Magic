@@ -7,11 +7,15 @@ class_name Factions extends RefCounted
 
 enum Team { PLAYER, ENEMY, NEUTRAL }
 
-# Physics layers mirror project.godot: 1=Player, 2=Enemies, 3=Walls, 4=Projectiles.
-const LAYER_PLAYER := 1
-const LAYER_ENEMIES := 2
-const LAYER_WALLS := 3
-const LAYER_PROJECTILES := 4
+# Physics layers. These MUST match the host project's 2D physics layer numbers (Project
+# Settings ▸ Layer Names ▸ 2D Physics). They are `static var`, not `const`, so a project
+# whose layers differ can remap them once at startup (e.g. `Factions.LAYER_PLAYER = 5`)
+# without editing the package. Defaults mirror this project: 1=Player, 2=Enemies,
+# 3=Walls, 4=Projectiles.
+static var LAYER_PLAYER := 1
+static var LAYER_ENEMIES := 2
+static var LAYER_WALLS := 3
+static var LAYER_PROJECTILES := 4
 
 static func apply_targeting(spell: Area2D, faction: int) -> void:
 	# Start clean: a fresh Area2D defaults to layer/mask = 1 (Player), which would

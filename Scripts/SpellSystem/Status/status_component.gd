@@ -5,16 +5,19 @@ class_name StatusComponent extends Node
 ## as HealthComponent / HitboxComponent). Statuses stack independently — each call to
 ## apply_status() adds its own RuntimeStatus with its own clock.
 ##
-## Zero-config wiring: if health_component isn't set in the inspector it grabs the
-## sibling HealthComponent automatically, so you only have to drop the node in.
+## Zero-config wiring: if the damage sink isn't set in the inspector it grabs a sibling
+## that exposes apply_damage() automatically, so you only have to drop the node in.
 
-@export var health_component: HealthComponent
+## The node DoT statuses damage through: any sibling exposing apply_damage(amount, hit)
+## — HealthComponent/HitboxComponent here. Duck-typed on purpose (typed as Node, not a
+## concrete class) so the package depends on the contract, not a host's health model.
+@export var health_component: Node
 
 var _active: Array[RuntimeStatus] = []
 
 func _ready() -> void:
 	if health_component == null:
-		health_component = _find_sibling_health()
+		health_component = _find_damage_sink()
 
 ## Attach a new independent application of `effect`. `hit` carries the caster
 ## attribution/stats that the status will keep for its whole lifetime.
@@ -52,11 +55,11 @@ func _physics_process(delta: float) -> void:
 			_active[i].effect.on_remove(_active[i])
 			_active.remove_at(i)
 
-func _find_sibling_health() -> HealthComponent:
+func _find_damage_sink() -> Node:
 	var p := get_parent()
 	if p == null:
 		return null
 	for child in p.get_children():
-		if child is HealthComponent:
-			return child as HealthComponent
+		if child.has_method("apply_damage"):
+			return child
 	return null

@@ -35,7 +35,7 @@ func _default_def() -> SpellDefinition:
 	def.cooldown = 1.0
 	def.lifetime = 1.5
 	def.max_range = 500.0
-	def.element = Utility.Element.Fire
+	def.element = SpellUtil.Element.Fire
 	var s := CircleHitShape.new()
 	s.radius = 12.0
 	def.shape = s

@@ -34,9 +34,9 @@ for free — the only new code is how it resolves aim.
 
 | Slot             | Base                | Examples so far                     |
 |------------------|---------------------|-------------------------------------|
-| Emission         | `EmissionPattern`   | `FanPattern`                        |
-| Shape            | `HitShape`          | `CircleHitShape`, `ConeHitShape`    |
-| Movement         | `SpellMovement`     | `StraightMovement`, `ExpandMovement`|
+| Emission         | `EmissionPattern`   | `SinglePattern`, `FanPattern`, `RingPattern`, `LinePattern` |
+| Shape            | `HitShape`          | `Circle`, `Cone`, `Rectangle`, `Triangle` (`…HitShape`) |
+| Movement         | `SpellMovement`     | `Straight`, `Expand`, `Wave`, `Accelerate`, `Stationary`, `Homing` (`…Movement`) |
 | Effects          | `SpellEffect`       | `DamageEffect`, `SpawnSpellEffect`, `ApplyStatusEffect` |
 | Status           | `StatusEffect`      | `DamageOverTimeStatus`, `MovementStatus`, `SpawnOnTickStatus` |
 
@@ -68,7 +68,32 @@ through here via `Spellbook` + `SpellLibrary`:
 Enemies can reuse any of these: add a `CasterComponent` (faction = ENEMY) + a
 `Spellbook`, and call `try_cast` aimed at the target.
 
+## Using this package in another project (host contract)
+
+`Scripts/SpellSystem/` is self-contained: it depends on **no host autoload** (it owns
+`SpellUtil` — the `Element` enum + shape geometry) and on **no concrete host class** (damage
+and status delivery are duck-typed). To drop it into another game, the host supplies four
+things — everything else is the package's job:
+
+1. **A damage sink** — any node with `apply_damage(amount: float, hit: HitInfo)`. `DamageEffect`
+   and DoT statuses resolve against it via `has_method`. `HealthComponent` / `HitboxComponent`
+   here are *reference* implementations — swap in your own health/armor/death model.
+2. **A `StatusComponent`** (optional) under any entity that can be afflicted; it auto-finds the
+   sibling damage sink. Only needed for spells that apply statuses.
+3. **A caster** — a `CasterComponent` (faction + stats + origin + `rng`) on anything that casts,
+   plus a `Spellbook` the host drives via `try_cast()`. The host reads input/AI; **the package
+   never reads `Input`**.
+4. **Physics layers** matching `Factions` (default 1=Player, 2=Enemies, 3=Walls, 4=Projectiles),
+   or remap `Factions.LAYER_*` once at startup.
+
+The host owns **policy** (authority, input, RNG source via `CasterComponent.rng`, persistence,
+networking) — see the mechanism-vs-policy section in the root `CLAUDE.md`. Single-player needs
+none of it. The package boundary is exactly this folder: to share it, extract `Scripts/SpellSystem/`
+to its own git repo and add it back to each project as a submodule (it needn't live under
+`addons/` — it isn't an editor plugin). The in-game editor (`Scripts/UI/spell_editor.gd` +
+`property_editor.gd`) is optional tooling that can travel with it.
+
 ## Not built yet (deliberately)
 
 Silence (blocking casts, vs the movement-only stun), object pooling, aim-mode/telegraph
-resources, bounce & homing movements. The base classes absorb these as new subclasses.
+resources, bounce & orbit movements. The base classes absorb these as new subclasses.

@@ -9,4 +9,4 @@ func build_shape() -> Shape2D:
 	return s
 
 func build_polygon() -> PackedVector2Array:
-	return Utility.draw_circle(segments, radius)
+	return SpellUtil.draw_circle(segments, radius)

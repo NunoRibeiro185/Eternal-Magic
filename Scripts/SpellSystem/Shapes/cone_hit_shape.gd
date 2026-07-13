@@ -9,8 +9,8 @@ class_name ConeHitShape extends HitShape
 
 func build_shape() -> Shape2D:
 	var s := ConvexPolygonShape2D.new()
-	s.points = Utility.draw_cone(resolution, width, length)
+	s.points = SpellUtil.draw_cone(resolution, width, length)
 	return s
 
 func build_polygon() -> PackedVector2Array:
-	return Utility.draw_cone(resolution, width, length)
+	return SpellUtil.draw_cone(resolution, width, length)

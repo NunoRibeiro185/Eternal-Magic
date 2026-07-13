@@ -23,7 +23,7 @@ static func _add_aoe_visuals(def: SpellDefinition) -> void:
 ## tuning one doesn't leak into another (Resources are shared by reference).
 static func _burn() -> DamageOverTimeStatus:
 	var s := DamageOverTimeStatus.new()
-	s.element = Utility.Element.Fire
+	s.element = SpellUtil.Element.Fire
 	s.duration = 3.0
 	s.interval = 0.5
 	s.damage_per_tick = 2.0
@@ -33,7 +33,7 @@ static func _burn() -> DamageOverTimeStatus:
 ## piercing lance STACKS several independent frost ticks on the same target.
 static func _frost() -> DamageOverTimeStatus:
 	var s := DamageOverTimeStatus.new()
-	s.element = Utility.Element.Ice
+	s.element = SpellUtil.Element.Ice
 	s.duration = 5.0
 	s.interval = 1.0
 	s.damage_per_tick = 1.5
@@ -42,7 +42,7 @@ static func _frost() -> DamageOverTimeStatus:
 ## A heavy slow (earth): 40% speed for 2.5s. No tick, no damage — pure locomotion.
 static func _slow() -> MovementStatus:
 	var s := MovementStatus.new()
-	s.element = Utility.Element.Earth
+	s.element = SpellUtil.Element.Earth
 	s.duration = 2.5
 	s.interval = 0.0
 	s.multiplier = 0.4
@@ -51,7 +51,7 @@ static func _slow() -> MovementStatus:
 ## A brief full stun (lightning): rooted for 0.6s (multiplier 0.0).
 static func _stun() -> MovementStatus:
 	var s := MovementStatus.new()
-	s.element = Utility.Element.Electric
+	s.element = SpellUtil.Element.Electric
 	s.duration = 0.6
 	s.interval = 0.0
 	s.multiplier = 0.0
@@ -63,7 +63,7 @@ static func _ember_nova() -> SpellDefinition:
 	var def := SpellDefinition.new()
 	def.lifetime = 0.35
 	def.pierce = true
-	def.element = Utility.Element.Fire
+	def.element = SpellUtil.Element.Fire
 	var s := CircleHitShape.new()
 	s.radius = 8.0
 	def.shape = s
@@ -80,7 +80,7 @@ static func _ember_nova() -> SpellDefinition:
 ## Ember: an on_tick status that erupts a small nova on the burning target each second.
 static func _ember() -> SpawnOnTickStatus:
 	var s := SpawnOnTickStatus.new()
-	s.element = Utility.Element.Fire
+	s.element = SpellUtil.Element.Fire
 	s.duration = 3.0
 	s.interval = 1.0
 	s.spell = _ember_nova()
@@ -103,7 +103,7 @@ static func recipe_demo() -> SpellDefinition:
 	recipe.components.append(form)
 
 	var elem := ElementComponent.new()
-	elem.element = Utility.Element.Fire
+	elem.element = SpellUtil.Element.Fire
 	recipe.components.append(elem)
 
 	var dmg := DamageComponent.new()
@@ -149,7 +149,7 @@ static func hex_bolt() -> SpellDefinition:
 	def.cooldown = 2.0
 	def.lifetime = 4.0
 	def.max_range = 800.0
-	def.element = Utility.Element.Void
+	def.element = SpellUtil.Element.Void
 	var s := CircleHitShape.new()
 	s.radius = 12.0
 	def.shape = s
@@ -175,7 +175,7 @@ static func shock_bolt() -> SpellDefinition:
 	def.cooldown = 3.0
 	def.lifetime = 3.0
 	def.max_range = 900.0
-	def.element = Utility.Element.Electric
+	def.element = SpellUtil.Element.Electric
 	var s := CircleHitShape.new()
 	s.radius = 10.0
 	def.shape = s
@@ -198,7 +198,7 @@ static func fire_fan() -> SpellDefinition:
 	def.cooldown = 1.0
 	def.lifetime = 1.5
 	def.max_range = 600.0
-	def.element = Utility.Element.Fire
+	def.element = SpellUtil.Element.Fire
 	var e := FanPattern.new()
 	e.count = 3
 	e.spread_deg = 30.0
@@ -225,7 +225,7 @@ static func flame_cone() -> SpellDefinition:
 	def.can_move_while_casting = true
 	def.lifetime = 0.8
 	def.pierce = true
-	def.element = Utility.Element.Fire
+	def.element = SpellUtil.Element.Fire
 	var s := ConeHitShape.new()
 	s.width = 120.0
 	s.length = 40.0
@@ -250,7 +250,7 @@ static func piercing_lance() -> SpellDefinition:
 	def.lifetime = 2.0
 	def.max_range = 800.0
 	def.pierce = true
-	def.element = Utility.Element.Ice
+	def.element = SpellUtil.Element.Ice
 	var s := TriangleHitShape.new()
 	s.width = 24.0
 	s.length = 40.0
@@ -274,7 +274,7 @@ static func fire_burst() -> SpellDefinition:
 	var nova := SpellDefinition.new()
 	nova.lifetime = 0.5
 	nova.pierce = true
-	nova.element = Utility.Element.Fire
+	nova.element = SpellUtil.Element.Fire
 	var ns := CircleHitShape.new()
 	ns.radius = 10.0
 	nova.shape = ns
@@ -297,7 +297,7 @@ static func fire_burst() -> SpellDefinition:
 	def.cooldown = 2.0
 	def.lifetime = 0.7
 	def.max_range = 300.0
-	def.element = Utility.Element.Fire
+	def.element = SpellUtil.Element.Fire
 	var s := CircleHitShape.new()
 	s.radius = 8.0
 	def.shape = s
@@ -320,7 +320,7 @@ static func lightning() -> SpellDefinition:
 	def.lifetime = 0.6
 	def.max_range = 900.0
 	def.pierce = true
-	def.element = Utility.Element.Electric
+	def.element = SpellUtil.Element.Electric
 	var e := FanPattern.new()
 	e.count = 3
 	e.spread_deg = 18.0
@@ -352,7 +352,7 @@ static func earth() -> SpellDefinition:
 	def.cooldown = 4.0
 	def.lifetime = 0.7
 	def.pierce = true
-	def.element = Utility.Element.Earth
+	def.element = SpellUtil.Element.Earth
 	var s := CircleHitShape.new()
 	s.radius = 20.0
 	def.shape = s
