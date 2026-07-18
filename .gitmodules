@@ -1,0 +1,3 @@
+[submodule "Scripts/SpellSystem"]
+	path = Scripts/SpellSystem
+	url = https://github.com/NunoRibeiro185/godot-spellsystem.git
